@@ -683,8 +683,16 @@ main {
 .custom-tooltip.visible {
     opacity: 1;
     visibility: visible;
-    transform: translateX(-50%) translateY(-110%); /* 悬浮时略微向下移动 */
+    /* 默认向上弹出时的最终位置 */
+    transform: translateX(-50%) translateY(-110%); 
 }
+
+/* NEW: Tooltip 向下弹出时的样式 */
+.custom-tooltip.tooltip-down {
+    /* 调整 transform，使其位于卡片底部 (0%是顶部，100%是底部，卡片高度由 JS 决定) */
+    transform: translateX(-50%) translateY(0%); 
+}
+
 
 /* Tooltip 内部结构 */
 .tooltip-header {
@@ -766,11 +774,9 @@ main {
 }
 
 /* NEW: 首页软件日期样式 (保留，因为它用于 home.js 渲染的卡片) */
-.software-card-home .software-info .software-date {
-    font-size: 0.85em;
-    color: var(--highlight);
-    margin-bottom: 8px;
-}
+/* 统一首页卡片样式：删除 .software-card-home，使用 .software-card */
+/* 删除 .software-card-home .software-info .software-date 样式，因为现在使用 .software-date-full */
+
 
 .loading {
   grid-column: 1 / -1;
@@ -936,36 +942,27 @@ footer {
   gap: 20px;
 }
 
-.software-card-home {
-  background-color: var(--bg-color);
-  border: 1px solid var(--border-color);
-  border-radius: 6px;
-  padding: 15px;
-  /* OLD: display: flex; flex-direction: column; 保持不变 */
-  display: flex;
-  flex-direction: column;
-  /* 确保卡片是相对定位的 */
-  position: relative; 
-}
+/* * ------------------------------------------------------------------ 
+* START: 移除所有 .software-card-home 相关的特殊样式，统一使用 .software-card
+* ------------------------------------------------------------------ 
+*/
 
-.software-card-home:hover {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* 提升阴影效果 */
-}
-
-/* ------------------------------------------------------------------ */
-/* START: 首页卡片布局修改 (替换原有的 .software-card-home .software-icon 和 .software-card-home .software-info 样式) */
-
-/* NEW: 首页卡片标题行容器 */
+/* 移除首页卡片内部的特定布局样式 */
 .software-title-line-home {
+    /* 调整：使其和 .software-title-line 保持一致的边距 */
     display: flex;
-    align-items: center; /* 垂直居中对齐 */
-    margin-bottom: 10px; /* 标题和描述之间的间距 */
+    align-items: center; 
+    /* 移除 margin-bottom，让 .software-info 内部的 margin 统一控制 */
+    margin-bottom: 0; 
+    padding: 10px 20px; 
+    background-color: var(--nav-bg); 
+    border-radius: 8px 8px 0 0; 
 }
 
 .software-icon-home {
-    /* 保持原有 48x48 尺寸，并作为容器 */
-    width: 48px;
-    height: 48px;
+    /* 调整：使其和 .software-icon-small 保持一致的尺寸 */
+    width: 32px; 
+    height: 32px;
     margin-right: 10px;
     flex-shrink: 0;
 }
@@ -976,79 +973,27 @@ footer {
     object-fit: contain;
 }
 
-.software-info-body {
-    /* 描述和下载按钮的容器 */
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1; /* 占据剩余空间 */
-}
-
-
-/* 覆盖原有的 .software-card-home .software-icon 样式 (已用 .software-icon-home 替代) */
-/*
-.software-card-home .software-icon {
-  padding: 0;
-  margin-right: 15px;
-  background: none;
-}
-.software-card-home .software-icon img {
-  width: 48px;
-  height: 48px;
-}
-.software-card-home .software-info {
-  flex-grow: 1;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-}
-.software-card-home .software-info h4 { ... }
-.software-card-home .software-info p { ... }
-*/
 
 .software-title-line-home h4 {
-  /* 覆盖原有 h4 样式，确保与图标垂直居中 */
-  font-size: 1.2rem;
+  /* 调整：使其和 .software-info h3 保持一致 */
+  font-size: 1.3rem;
   margin-top: 0;
   margin-bottom: 0;
   line-height: 1.2;
-}
-
-.software-info-body p {
-  font-size: 0.9em;
-  color: var(--secondary-text);
-  margin-bottom: 10px;
-  /* 修复：确保描述占据空间并推动底部元素 */
-  flex-grow: 1;
-  
-  /* 修复：使用 Webkit 属性实现多行省略号（限制 2 行） */
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
+  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
-/* END: 首页卡片布局修改 */
-/* ------------------------------------------------------------------ */
 
-.software-card-home .software-info-body a.btn-sm {
-  margin-top: auto; /* NEW: 将下载按钮推到底部 */
+/* 调整：将下载按钮推到底部 */
+.software-card .software-links {
+    margin-top: auto; 
 }
+
 
 .btn-sm {
-  display: inline-block;
-  background-color: var(--btn-bg);
-  color: white;
-  padding: 5px 12px;
-  border-radius: 4px;
-  text-decoration: none;
-  font-size: 0.9em;
-  transition: background-color 0.3s ease;
-}
-
-.btn-sm:hover {
-  background-color: var(--btn-hover);
-  text-decoration: none;
+  /* 移除，使用通用的 .software-links a 样式代替 */
+  display: none;
 }
 
 .more-link {

@@ -28,29 +28,57 @@ document.addEventListener('DOMContentLoaded', function() {
             <div class="tooltip-body">${tooltipContent}</div>
         `;
 
-        // 3. 计算 Tooltip 位置 (相对于卡片居中，并位于卡片上方)
+        // 3. 计算 Tooltip 位置
         const rect = card.getBoundingClientRect();
         const scrollX = window.scrollX || document.documentElement.scrollLeft;
         const scrollY = window.scrollY || document.documentElement.scrollTop;
         
-        // Tooltip 的左侧定位点 (卡片中心点的 X 坐标)
+        // 卡片顶部的 Y 坐标（用于向上弹出时的定位参考）
+        const cardTopY = rect.top + scrollY;
+        // Tooltip 的水平定位点 (卡片中心点的 X 坐标)
         const tooltipX = rect.left + rect.width / 2 + scrollX;
-        // Tooltip 的顶部定位点 (卡片顶部的 Y 坐标)
-        const tooltipY = rect.top + scrollY;
 
-        // 应用定位 (CSS transform 负责将 Tooltip 向上和向左移动其自身宽度/高度的一半)
+        // 设置水平定位
         tooltip.style.position = 'absolute';
         tooltip.style.left = `${tooltipX}px`;
-        tooltip.style.top = `${tooltipY}px`;
+        
+        // **NEW: 边界检测和调整**
+        // 必须先让 tooltip 可见（但不透明），才能获取其真实高度
+        tooltip.style.opacity = '0';
+        tooltip.style.visibility = 'visible';
+        tooltip.classList.remove('tooltip-down'); // 确保默认向上弹出
+        
+        const tooltipHeight = tooltip.offsetHeight;
+        
+        // 检查 Tooltip 是否会超出屏幕上方（rect.top 是卡片相对于视口顶部的距离）
+        // 如果卡片顶部距离视口顶部的距离小于 Tooltip 的高度加上一些缓冲距离 (10px)，则向下弹出。
+        if (rect.top - tooltipHeight - 10 < 0) {
+            // 如果会超出，设置向下弹出的类
+            tooltip.classList.add('tooltip-down');
+            
+            // FIX: 当向下弹出时，将 top 设置为卡片底部位置 + 10px 缓冲
+            const cardBottomY = rect.bottom + scrollY;
+            tooltip.style.top = `${cardBottomY + 10}px`; 
+            
+        } else {
+            // 否则，保持向上弹出
+            tooltip.classList.remove('tooltip-down');
+            // FIX: 向上弹出时，top 属性设置为卡片顶部 Y 坐标
+            tooltip.style.top = `${cardTopY}px`; 
+        }
 
         // 4. 显示 Tooltip
         tooltip.classList.add('visible');
+        tooltip.style.opacity = '1';
     }
 
     function hideTooltip() {
         const tooltip = document.getElementById('global-software-tooltip');
         if (tooltip) {
             tooltip.classList.remove('visible');
+            tooltip.classList.remove('tooltip-down'); // 隐藏时移除类
+            tooltip.style.opacity = '0'; // 确保透明度也归零
+            tooltip.style.visibility = 'hidden'; // 确保彻底隐藏
         }
     }
     // --- End Tooltip Manager Functions ---
