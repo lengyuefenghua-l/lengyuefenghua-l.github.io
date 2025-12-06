@@ -65,11 +65,15 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             const data = await response.json();
             
-            // **修复：显式按日期降序排序 (最新在前)**
+            // **修复：显式按日期降序排序 (最新在前) - NEW: 使用 updated_date 排序**
             data.sort((a, b) => {
+                // 使用 updated_date 进行排序，如果不存在则回退到 date
+                const dateA = a.updated_date || a.date;
+                const dateB = b.updated_date || b.date;
+                
                 // 假设日期格式 YYYY-MM-DD 允许字符串比较
-                if (a.date < b.date) return 1;
-                if (a.date > b.date) return -1;
+                if (dateA < dateB) return 1;
+                if (dateA > dateB) return -1;
                 return 0;
             });
             
@@ -86,8 +90,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 const li = document.createElement('li');
                 // 标题从文件名中去除 .md
                 const title = article.file.replace('.md', '');
+                
+                // NEW: 显示最新的日期 (updated_date)
+                const displayDate = article.updated_date || article.date;
+                
                 // 链接到博客页面 (pages/blog.html)，并添加 title 属性用于悬浮提示
-                li.innerHTML = `<a href="./pages/blog.html" title="${title}">${title}</a><span class="article-date">${article.date}</span>`;
+                li.innerHTML = `<a href="./pages/blog.html" title="${title}">${title}</a><span class="article-date">${displayDate}</span>`;
                 latestArticlesContainer.appendChild(li);
             });
 

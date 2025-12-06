@@ -6,6 +6,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const toc = document.getElementById('toc');
     const searchInput = document.getElementById('search-input');
     const searchBtn = document.getElementById('search-btn');
+    // NEW: 获取返回顶部按钮
+    const backToTopBtn = document.getElementById('back-to-top'); 
     
     // 存储从 JSON 加载的文章元数据
     let articles = [];
@@ -20,7 +22,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 setupEventListeners();
                 // 默认加载第一篇文章
                 if (articles.length > 0) {
-                    loadArticle(articles[0].id);
+                    // 由于列表现在已排序，默认加载排序后的第一篇文章
+                    loadArticle(articles[0].id); 
                     // 确保列表中的第一篇文章被标记为活动状态
                     const firstArticleLink = document.querySelector('.article-list a[data-id="' + articles[0].id + '"]');
                     if (firstArticleLink) {
@@ -46,7 +49,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 title: article.file.replace('.md', ''),
                 // 修正 Markdown 文件路径：相对 pages/blog.html 应该在 ../data/articles/
                 file: `../data/articles/${article.file}`, 
-                date: article.date 
+                date: article.date, // 原始创建日期
+                updated_date: article.updated_date || article.date // NEW: 最后修改日期，如果不存在则使用创建日期
             }));
 
         } catch (error) {
@@ -66,10 +70,21 @@ document.addEventListener('DOMContentLoaded', function() {
              return;
         }
 
-        const filteredArticles = filter 
+        let filteredArticles = filter 
             ? articles.filter(article => article.title.toLowerCase().includes(filter.toLowerCase()))
-            : articles;
-        
+            : [...articles]; // 复制一份，避免在未筛选时修改原始数组的顺序
+
+        // **NEW: 按照 updated_date 降序排序 (最新在前)**
+        filteredArticles.sort((a, b) => {
+            const dateA = a.updated_date || a.date;
+            const dateB = b.updated_date || b.date;
+            
+            // 降序排序 (最新日期在前)
+            if (dateA < dateB) return 1;
+            if (dateA > dateB) return -1;
+            return 0;
+        });
+
         if (filteredArticles.length === 0) {
             articleList.innerHTML = '<li>没有找到匹配的文章</li>';
             return;
@@ -77,8 +92,11 @@ document.addEventListener('DOMContentLoaded', function() {
         
         filteredArticles.forEach(article => {
             const li = document.createElement('li');
+            // NEW: 在列表中显示最新的日期 (updated_date)
+            const displayDate = article.updated_date || article.date;
+            
             // 修复：将日期显示为右浮动的小标签，并在链接上添加 title 属性用于悬浮提示
-            li.innerHTML = `<a href="#" data-id="${article.id}" title="${article.title}">${article.title}</a><span class="article-date">${article.date}</span>`;
+            li.innerHTML = `<a href="#" data-id="${article.id}" title="${article.title}">${article.title}</a><span class="article-date">${displayDate}</span>`;
             articleList.appendChild(li);
             
             // 添加点击事件
@@ -128,7 +146,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // 使用marked解析Markdown
             const html = marked.parse(correctedText);
-            articleContent.innerHTML = html;
+            
+            // NEW: 构造并预置文章日期信息 (创建日期和最后修改日期)
+            const dateBlockHTML = `
+                <div class="article-metadata">
+                    <span class="created-date">创建于: ${article.date}</span>
+                    <span class="updated-date">最后修改于: ${article.updated_date || article.date}</span>
+                </div>
+            `;
+            
+            // 将日期信息块预置在文章内容之前
+            articleContent.innerHTML = dateBlockHTML + html;
             
             // 3. 图片错误处理 (针对 Marked 解析出的 <img> 标签)
             document.querySelectorAll('.article-content img').forEach(img => {
@@ -239,6 +267,27 @@ document.addEventListener('DOMContentLoaded', function() {
                 renderArticleList(filter);
             }
         });
+        
+        // NEW: 返回顶部功能
+        if (backToTopBtn) {
+            // 监听滚动事件，控制按钮的显示/隐藏
+            window.addEventListener('scroll', function() {
+                // 当滚动超过 300px 时显示按钮
+                if (window.scrollY > 300) {
+                    backToTopBtn.classList.add('visible');
+                } else {
+                    backToTopBtn.classList.remove('visible');
+                }
+            });
+            
+            // 监听按钮点击事件，平滑滚动到顶部
+            backToTopBtn.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        }
     }
     
     // 初始化

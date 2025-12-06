@@ -974,3 +974,60 @@ footer {
     grid-template-columns: 1fr;
   }
 }
+
+/* ... (保留原有样式) ... */
+
+/* 文章元数据样式 (创建日期/修改日期) */
+.article-content .article-metadata {
+    display: flex; /* 使用 Flexbox 进行布局 */
+    justify-content: flex-end; /* 右对齐 */
+    gap: 15px; /* 元素间距 */
+    font-size: 0.9em;
+    color: var(--secondary-text);
+    margin-top: -10px; /* 向上微调，靠近文章标题 */
+    margin-bottom: 20px; /* 增加与正文的间距 */
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border-color); /* 添加分割线 */
+}
+
+.article-content .article-metadata span {
+    white-space: nowrap;
+}
+
+.article-content .article-metadata .updated-date {
+    /* 突出显示修改日期 */
+    color: var(--highlight); 
+    font-weight: bold;
+}
+
+/* NEW: 返回顶部按钮样式 */
+.back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background-color: var(--highlight);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    opacity: 0; /* 默认隐藏 */
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    z-index: 1000;
+}
+
+.back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.back-to-top:hover {
+    background-color: var(--btn-hover);
+}
+
+
+/* ... (保留后续样式) ... */
