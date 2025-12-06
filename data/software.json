@@ -36,12 +36,30 @@
         "date": "2025-12-05"
     },
     {
+        "name": "Sumatra PDF",
+        "description": "最好用的PDF文件查看器，体积小巧，极速启动",
+        "details":"PDF, eBook (epub, mobi), comic book (cbz/cbr), DjVu, XPS, CHM, image viewer for Windows.PDF、电子书（epub、mobi）、漫画书（cbz/cbr）、DjVu、XPS、CHM、图像查看器，适用于 Windows。Fast, small, packed with features, customizable, free.快速、小巧、功能丰富、可定制、免费。",
+        "icon": "https://www.sumatrapdfreader.org/favicon.ico",
+        "category": "装机必备",
+        "website": "https://www.sumatrapdfreader.org/free-pdf-reader",
+        "date": "2025-12-05"
+    },
+    {
         "name": "Snipaste",
         "description": "Snipaste 是一个简单但强大的截图工具，也可以让你将截图贴回到屏幕上！",
         "details":"Snipaste 是一个简单但强大的截图工具，也可以让你将截图贴回到屏幕上！下载并打开 Snipaste，按下 F1 来开始截图，再按 F3，截图就在桌面置顶显示了。就这么简单！你还可以将剪贴板里的文字或者颜色信息转化为图片窗口，并且将它们进行缩放、旋转、翻转、设为半透明，甚至让鼠标能穿透它们！如果你是程序员、设计师，或者是大部分工作时间都在电脑前，贴图功能将改变你的工作方式、提升工作效率。",
         "icon": "https://www.snipaste.com/img/logo.svg",
         "category": "装机必备",
         "website": "https://zh.snipaste.com/",
+        "date": "2025-12-06"
+    },
+     {
+        "name": "Ditto",
+        "description": "Ditto 是标准 Windows 剪贴板的扩展。可以记录你复制的所有内容，方便你以后访问这些内容。",
+        "details":"Ditto 是标准 Windows 剪贴板的扩展。它保存剪贴板上的每一项，方便你以后访问这些内容。Ditto 允许你保存任何可以放到剪贴板上的信息，比如文本、图片、html、自定义格式。",
+        "icon": "https://ditto-cp.sourceforge.io/Ditto2.png",
+        "category": "装机必备",
+        "website": "https://sabrogden.github.io/Ditto/",
         "date": "2025-12-06"
     },
     {

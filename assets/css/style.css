@@ -239,6 +239,10 @@ main {
   flex-shrink: 0; 
   /* 添加右侧内边距作为分隔 */
   padding-right: 20px;
+  position: sticky;
+  top: 80px;
+  height: calc(100vh - 120px);
+  overflow-y: auto;
 }
 
 .search-box {

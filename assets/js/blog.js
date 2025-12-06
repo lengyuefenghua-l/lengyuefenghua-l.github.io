@@ -6,8 +6,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const toc = document.getElementById('toc');
     const searchInput = document.getElementById('search-input');
     const searchBtn = document.getElementById('search-btn');
-    // NEW: 获取返回顶部按钮
-    const backToTopBtn = document.getElementById('back-to-top'); 
     
     // 存储从 JSON 加载的文章元数据
     let articles = [];
@@ -18,12 +16,26 @@ document.addEventListener('DOMContentLoaded', function() {
     function init() {
         loadArticleIndex()
             .then(() => {
+                
+                // NEW: 确保全局文章列表已按日期降序排序 (最新在前)，以保证 articles[0] 是最新文章
+                articles.sort((a, b) => {
+                    const dateA = a.updated_date || a.date;
+                    const dateB = b.updated_date || b.date;
+                    
+                    // 降序排序 (最新日期在前)
+                    if (dateA < dateB) return 1;
+                    if (dateA > dateB) return -1;
+                    return 0;
+                });
+                
                 renderArticleList();
                 setupEventListeners();
+                
                 // 默认加载第一篇文章
                 if (articles.length > 0) {
-                    // 由于列表现在已排序，默认加载排序后的第一篇文章
+                    // articles[0] 现在已经是最新排序后的第一篇文章
                     loadArticle(articles[0].id); 
+                    
                     // 确保列表中的第一篇文章被标记为活动状态
                     const firstArticleLink = document.querySelector('.article-list a[data-id="' + articles[0].id + '"]');
                     if (firstArticleLink) {
@@ -70,20 +82,10 @@ document.addEventListener('DOMContentLoaded', function() {
              return;
         }
 
+        // 现在 articles 已经被排序，可以直接使用
         let filteredArticles = filter 
             ? articles.filter(article => article.title.toLowerCase().includes(filter.toLowerCase()))
-            : [...articles]; // 复制一份，避免在未筛选时修改原始数组的顺序
-
-        // **NEW: 按照 updated_date 降序排序 (最新在前)**
-        filteredArticles.sort((a, b) => {
-            const dateA = a.updated_date || a.date;
-            const dateB = b.updated_date || b.date;
-            
-            // 降序排序 (最新日期在前)
-            if (dateA < dateB) return 1;
-            if (dateA > dateB) return -1;
-            return 0;
-        });
+            : articles;
 
         if (filteredArticles.length === 0) {
             articleList.innerHTML = '<li>没有找到匹配的文章</li>';
@@ -267,27 +269,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 renderArticleList(filter);
             }
         });
-        
-        // NEW: 返回顶部功能
-        if (backToTopBtn) {
-            // 监听滚动事件，控制按钮的显示/隐藏
-            window.addEventListener('scroll', function() {
-                // 当滚动超过 300px 时显示按钮
-                if (window.scrollY > 300) {
-                    backToTopBtn.classList.add('visible');
-                } else {
-                    backToTopBtn.classList.remove('visible');
-                }
-            });
-            
-            // 监听按钮点击事件，平滑滚动到顶部
-            backToTopBtn.addEventListener('click', function() {
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth'
-                });
-            });
-        }
     }
     
     // 初始化

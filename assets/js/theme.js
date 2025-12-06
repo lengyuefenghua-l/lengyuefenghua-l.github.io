@@ -26,4 +26,28 @@ document.addEventListener('DOMContentLoaded', function() {
             localStorage.setItem('theme', 'light');
         }
     });
+
+    // --- NEW: Back to Top button logic (通用功能) ---
+    const backToTopBtn = document.getElementById('back-to-top'); 
+    
+    if (backToTopBtn) {
+        // 监听滚动事件，控制按钮的显示/隐藏
+        window.addEventListener('scroll', function() {
+            // 当滚动超过 300px 时显示按钮
+            if (window.scrollY > 300) {
+                backToTopBtn.classList.add('visible');
+            } else {
+                backToTopBtn.classList.remove('visible');
+            }
+        });
+        
+        // 监听按钮点击事件，平滑滚动到顶部
+        backToTopBtn.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    }
+    // --- End Back to Top logic ---
 });
