@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const toc = document.getElementById('toc');
     const searchInput = document.getElementById('search-input');
     const searchBtn = document.getElementById('search-btn');
+    const articleCountBadge = document.getElementById('article-count'); // NEW: 获取文章总数显示元素
     
     // 存储从 JSON 加载的文章元数据
     let articles = [];
@@ -65,10 +66,18 @@ document.addEventListener('DOMContentLoaded', function() {
                 updated_date: article.updated_date || article.date // NEW: 最后修改日期，如果不存在则使用创建日期
             }));
 
+            // NEW: 更新文章总数
+            if (articleCountBadge) {
+                articleCountBadge.textContent = `(${articles.length})`;
+            }
+
         } catch (error) {
             console.error('加载文章索引失败:', error);
             articleList.innerHTML = `<li>加载失败: ${error.message}</li>`;
             // 如果加载失败，保持 articles 为空数组
+            if (articleCountBadge) { // NEW: 加载失败也更新徽章
+                articleCountBadge.textContent = '(0)';
+            }
         }
     }
     
@@ -89,8 +98,18 @@ document.addEventListener('DOMContentLoaded', function() {
 
         if (filteredArticles.length === 0) {
             articleList.innerHTML = '<li>没有找到匹配的文章</li>';
+            // NEW: 更新筛选后的文章数量
+            if (articleCountBadge) {
+                articleCountBadge.textContent = `(0)`;
+            }
             return;
         }
+
+        // NEW: 更新筛选后的文章数量
+        if (articleCountBadge) {
+            articleCountBadge.textContent = `(${filteredArticles.length} / ${articles.length})`;
+        }
+
         
         filteredArticles.forEach(article => {
             const li = document.createElement('li');

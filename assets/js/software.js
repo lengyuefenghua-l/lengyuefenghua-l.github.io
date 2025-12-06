@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const SOFTWARE_DATA_URL = '../data/software.json';
     const softwareGrid = document.getElementById('software-grid');
     const categoryFilter = document.getElementById('category-filter');
+    const softwareCountBadge = document.getElementById('software-count'); // NEW: 获取软件总数显示元素
     let softwareData = [];
 
     // --- Tooltip Manager Functions (与 home.js 相同) ---
@@ -42,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function() {
         tooltip.style.position = 'absolute';
         tooltip.style.left = `${tooltipX}px`;
         
-        // **NEW: 边界检测和调整**
+        // **边界检测和调整**
         // 必须先让 tooltip 可见（但不透明），才能获取其真实高度
         tooltip.style.opacity = '0';
         tooltip.style.visibility = 'visible';
@@ -150,7 +151,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
         if (filteredList.length === 0) {
             softwareGrid.innerHTML = '<p class="loading">此类别下暂无软件推荐。</p>';
-            return;
+        }
+        
+        // NEW: 更新筛选后的软件数量
+        if (softwareCountBadge) {
+            if (filterCategory === 'All') {
+                softwareCountBadge.textContent = `(${softwareData.length})`;
+            } else {
+                softwareCountBadge.textContent = `(${filteredList.length} / ${softwareData.length})`;
+            }
         }
         
         // NEW: 默认按日期降序排序 (最新在前)
@@ -215,6 +224,10 @@ document.addEventListener('DOMContentLoaded', function() {
         } catch (error) {
             console.error('加载软件数据失败:', error);
             softwareGrid.innerHTML = `<div class="error">软件列表加载失败: ${error.message}</div>`;
+            // NEW: 加载失败也更新徽章
+            if (softwareCountBadge) {
+                softwareCountBadge.textContent = '(0)';
+            }
         }
     }
 

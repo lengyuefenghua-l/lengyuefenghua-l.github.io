@@ -277,6 +277,9 @@ main {
   margin-bottom: 15px;
   padding-bottom: 10px;
   border-bottom: 1px solid var(--border-color);
+  /* NEW: 保持 H3 和徽章垂直居中 */
+  display: flex;
+  align-items: center;
 }
 
 .article-list ul {
@@ -497,6 +500,10 @@ main {
 .software-header h2 {
   font-size: 2.2rem;
   margin-bottom: 20px;
+  /* NEW: 保持 H2 和徽章垂直居中 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .software-header p {
@@ -794,6 +801,31 @@ footer {
   color: var(--secondary-text);
 }
 
+/* New: Stats Summary Styles - REMOVED FOR INDEX.HTML, KEEPING FOR REFERENCE IF NEEDED */
+/* .stats-summary-section {
+    margin-bottom: 50px;
+    padding: 30px;
+    background-color: var(--card-bg);
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+}
+... (other stats styles removed)
+*/
+
+
+/* NEW: 徽章样式 (用于文章和软件数量) */
+.item-count-badge {
+    font-size: 0.9rem;
+    color: var(--secondary-text);
+    background-color: var(--nav-bg);
+    padding: 3px 8px;
+    border-radius: 12px;
+    margin-left: 10px;
+    font-weight: normal;
+    white-space: nowrap;
+}
+
+
 /* 响应式设计 */
 @media (max-width: 768px) {
   .features {
@@ -818,6 +850,20 @@ footer {
   .software-grid {
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   }
+  
+  /* Responsive adjustment for stats */
+    .stats-grid {
+        flex-direction: column;
+        gap: 0;
+    }
+    .stat-item {
+        border-right: none;
+        border-bottom: 1px solid var(--border-color);
+        padding: 15px 0;
+    }
+    .stat-item:last-child {
+        border-bottom: none;
+    }
 }
 
 @media (max-width: 576px) {
@@ -1011,13 +1057,6 @@ footer {
 
 .btn-more:hover {
   text-decoration: underline;
-}
-
-/* 响应式调整 */
-@media (max-width: 768px) {
-  .software-grid-home {
-    grid-template-columns: 1fr;
-  }
 }
 
 /* ... (保留原有样式) ... */

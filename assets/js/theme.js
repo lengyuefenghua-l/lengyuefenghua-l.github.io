@@ -6,28 +6,58 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // 检查本地存储中的主题设置
     const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'dark') {
+
+    // NEW: 自动主题切换逻辑
+    function autoSetTheme() {
+        const currentHour = new Date().getHours();
+        // 假设 7:00 到 19:00 为白天（浅色主题），其他时间为夜晚（深色主题）
+        const isDayTime = currentHour >= 7 && currentHour < 19;
+        
+        if (isDayTime) {
+            return 'light';
+        } else {
+            return 'dark';
+        }
+    }
+    
+    // 确定初始主题
+    let initialTheme;
+    if (savedTheme) {
+        // 如果用户手动设置过，使用用户设置
+        initialTheme = savedTheme;
+    } else {
+        // 否则，根据时间自动设置主题
+        initialTheme = autoSetTheme();
+        // 自动设置的主题不写入 localStorage，除非用户手动点击切换
+    }
+
+    // 应用初始主题
+    if (initialTheme === 'dark') {
         body.classList.add('dark-theme');
         icon.classList.remove('fa-moon');
         icon.classList.add('fa-sun');
+    } else {
+        body.classList.remove('dark-theme');
+        icon.classList.remove('fa-sun');
+        icon.classList.add('fa-moon');
     }
     
-    // 点击切换主题
+    // 点击切换主题 (保留手动切换逻辑，并更新 localStorage)
     themeToggle.addEventListener('click', function() {
         body.classList.toggle('dark-theme');
         
         if (body.classList.contains('dark-theme')) {
             icon.classList.remove('fa-moon');
             icon.classList.add('fa-sun');
-            localStorage.setItem('theme', 'dark');
+            localStorage.setItem('theme', 'dark'); // 手动切换后写入设置
         } else {
             icon.classList.remove('fa-sun');
             icon.classList.add('fa-moon');
-            localStorage.setItem('theme', 'light');
+            localStorage.setItem('theme', 'light'); // 手动切换后写入设置
         }
     });
 
-    // --- NEW: Back to Top button logic (通用功能) ---
+    // --- Back to Top button logic (通用功能) ---
     const backToTopBtn = document.getElementById('back-to-top'); 
     
     if (backToTopBtn) {
