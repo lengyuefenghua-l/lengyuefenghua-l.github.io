@@ -65,7 +65,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
         
         // 添加一个全局事件监听器，用于在鼠标移出软件网格时隐藏 Tooltip
-        // 这是一个额外的保险措施，防止 Tooltip 粘滞
         softwareGrid.addEventListener('mouseleave', hideTooltip);
     }
 
@@ -96,6 +95,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         const filteredSoftware = category === 'all' 
             ? softwareList 
+            // 筛选时直接使用 category 字段进行比较（支持中文）
             : softwareList.filter(software => software.category === category);
         
         if (filteredSoftware.length === 0) {
@@ -107,7 +107,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const card = document.createElement('div');
             card.className = 'software-card';
 
-            // 构造 Tooltip 内容（不再嵌入 Tooltip HTML）
+            // 构造 Tooltip 内容
             const tooltipContent = software.details || software.description;
 
             card.innerHTML = `
