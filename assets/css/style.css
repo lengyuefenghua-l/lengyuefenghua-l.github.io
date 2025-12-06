@@ -12,7 +12,7 @@
   --btn-hover: #0056b3;
   --shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   --highlight: #007bff;
-  --code-bg: #f6f8fa;
+  --code-bg: #f0f0f0; /* 调整: 浅色主题下增加代码块对比度 */
   --error-bg: #ffe0e0; /* 浅色主题下的错误背景 */
   --error-text: #cc0000; /* 浅色主题下的错误文本 */
   --tooltip-shadow: 0 6px 20px rgba(0, 0, 0, 0.15); /* 新增 Tooltip 阴影 */
@@ -32,7 +32,7 @@
   --btn-hover: #339af0;
   --shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
   --highlight: #4dabf7;
-  --code-bg: #2d2d2d;
+  --code-bg: #3c3c40; /* 调整: 暗色主题下增加代码块对比度 */
   --error-bg: #400000; /* 暗色主题下的错误背景 */
   --error-text: #ff9999; /* 暗色主题下的错误文本 */
   --tooltip-shadow: 0 6px 20px rgba(0, 0, 0, 0.5); /* Tooltip 阴影 */
@@ -456,6 +456,8 @@ main {
   border-radius: 4px;
   overflow-x: auto;
   margin-bottom: 20px;
+  /* NEW: 添加边框以突出代码块 */
+  border: 1px solid var(--border-color);
 }
 
 .article-content code {

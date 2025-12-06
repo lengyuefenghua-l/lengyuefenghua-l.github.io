@@ -4,6 +4,29 @@ document.addEventListener('DOMContentLoaded', function() {
     const body = document.body;
     const icon = themeToggle.querySelector('i');
     
+    // highlight.js 主题路径
+    // 使用 'github' (浅色) 和 'atom-one-dark' (暗色)
+    const HLJS_THEME_LIGHT = 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github.min.css';
+    const HLJS_THEME_DARK = 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css';
+    
+    /**
+     * 根据当前主题状态切换 highlight.js 的 CSS 文件。
+     * @param {boolean} isDark - 是否为暗色主题。
+     */
+    function switchHljsTheme(isDark) {
+        const hljsLink = document.getElementById('hljs-theme');
+        // 只有 blog 页面有 hljs-theme 元素
+        if (hljsLink) {
+            if (isDark) {
+                // 切换到暗色高亮主题
+                hljsLink.href = HLJS_THEME_DARK;
+            } else {
+                // 切换到浅色高亮主题
+                hljsLink.href = HLJS_THEME_LIGHT;
+            }
+        }
+    }
+    
     // 检查本地存储中的主题设置
     const savedTheme = localStorage.getItem('theme');
 
@@ -32,7 +55,8 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // 应用初始主题
-    if (initialTheme === 'dark') {
+    const isInitialDark = initialTheme === 'dark';
+    if (isInitialDark) {
         body.classList.add('dark-theme');
         icon.classList.remove('fa-moon');
         icon.classList.add('fa-sun');
@@ -42,11 +66,17 @@ document.addEventListener('DOMContentLoaded', function() {
         icon.classList.add('fa-moon');
     }
     
+    // NEW: 应用初始 highlight.js 主题
+    switchHljsTheme(isInitialDark);
+    
+    
     // 点击切换主题 (保留手动切换逻辑，并更新 localStorage)
     themeToggle.addEventListener('click', function() {
         body.classList.toggle('dark-theme');
         
-        if (body.classList.contains('dark-theme')) {
+        const isDark = body.classList.contains('dark-theme');
+        
+        if (isDark) {
             icon.classList.remove('fa-moon');
             icon.classList.add('fa-sun');
             localStorage.setItem('theme', 'dark'); // 手动切换后写入设置
@@ -55,6 +85,9 @@ document.addEventListener('DOMContentLoaded', function() {
             icon.classList.add('fa-moon');
             localStorage.setItem('theme', 'light'); // 手动切换后写入设置
         }
+        
+        // NEW: 切换 highlight.js 主题
+        switchHljsTheme(isDark);
     });
 
     // --- Back to Top button logic (通用功能) ---

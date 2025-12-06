@@ -123,6 +123,13 @@ document.addEventListener('DOMContentLoaded', function() {
             // 添加点击事件
             li.querySelector('a').addEventListener('click', function(e) {
                 e.preventDefault();
+                
+                // 关键更改：在加载内容前，第一时间滚动到页面顶部
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth' // 使用平滑滚动，体验更好
+                });
+                
                 loadArticle(article.id);
                 
                 // 更新活动状态
@@ -137,6 +144,8 @@ document.addEventListener('DOMContentLoaded', function() {
         const article = articles.find(a => a.id === articleId);
         if (!article) return;
         
+        // 移除滚动操作，已转移到点击事件监听器中。
+
         // 隐藏欢迎信息
         const welcomeMessage = document.querySelector('.welcome-message');
         if (welcomeMessage) welcomeMessage.style.display = 'none';
