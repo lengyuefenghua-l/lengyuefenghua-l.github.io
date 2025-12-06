@@ -75,7 +75,7 @@ exit
 
 ### 方法3Autohotkey脚本自动获取（推荐）
 
- ![在这里插入图片描述](./win10查看wifi密码的三种方式.assets/0_1.png)
+ ![在这里插入图片描述](./.assets/0_1.png)
 
 源码
 

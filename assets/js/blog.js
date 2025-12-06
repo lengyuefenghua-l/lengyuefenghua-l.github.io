@@ -58,10 +58,10 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // 确保文章文件名路径正确
             articles = data.map(article => ({
-                id: article.file.replace('.md', ''), // 使用文件名作为ID
-                title: article.file.replace('.md', ''),
+                id: article.file, // 使用文件名作为ID
+                title: article.file,
                 // 修正 Markdown 文件路径：相对 pages/blog.html 应该在 ../data/articles/
-                file: `../data/articles/${article.file}`, 
+                file: `../data/articles/${article.file}/${article.file}.md`, 
                 date: article.date, // 原始创建日期
                 updated_date: article.updated_date || article.date // NEW: 最后修改日期，如果不存在则使用创建日期
             }));
@@ -162,12 +162,14 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             return response.text();
         })
+        
         .then(text => {
+            const encodedArticleId = encodeURIComponent(articleId);
             // 1. 修正图片相对路径 (满足本地编辑习惯)
             // 将 Markdown 中的相对路径 `(./` 替换为 `(../data/articles/`。
             // 这样在 pages/blog.html 中才能正确访问 data/articles/ 目录下的图片。
-            let correctedText = text.replace(/\(\.\//g, '(../data/articles/');
-
+            let correctedText = text.replace(/\(\.\//g, `(../data/articles/${encodedArticleId}/`);
+console.log('Fetched article content for:', correctedText);
             // 2. 处理 HTML 格式的绝对路径（如 <img src="D:\Data\...），将其替换为提示信息
             // 匹配 <img src="D:\..." ... /> 或 <img src="C:\..." ... />
             correctedText = correctedText.replace(/<img\s+src=["']([a-z]:\\|file:\/\/\/).*?["'](.*?)>/gi, 

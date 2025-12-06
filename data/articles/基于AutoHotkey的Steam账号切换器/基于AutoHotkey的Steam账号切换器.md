@@ -6,18 +6,18 @@
 ## 一、界面展示
 
 主页面
- ![在这里插入图片描述](./基于AutoHotkey的Steam账号切换器.assets/0_1.png)
+ ![在这里插入图片描述](./.assets/0_1.png)
 
-![image-20251206151825118](./基于AutoHotkey的Steam账号切换器.assets/image-20251206151825118.png)
+![image-20251206151825118](./.assets/image-20251206151825118.png)
 
 托盘页面
- ![在这里插入图片描述](./基于AutoHotkey的Steam账号切换器.assets/0_2.png)
+ ![在这里插入图片描述](./.assets/0_2.png)
 
 ## 二、原理与实现
 
 第一步：获取账户信息
 读取Steam安装路径下config文件夹内的loginusers.vdf登录信息文件，获取账号名称，昵称、离线状态、登陆时间信息，文件如下所示：
- ![在这里插入图片描述](./基于AutoHotkey的Steam账号切换器.assets/0_3.png)
+ ![在这里插入图片描述](./.assets/0_3.png)
 
 第二步：注册表写入登录用户
 向注册表键HKEY_CURRENT_USER\SOFTWARE\Valve\Steam中的AutoLoginUser写入需要登录的用户名（注意不是昵称，同时，需要该账户以记住密码的方式登录过一次）
