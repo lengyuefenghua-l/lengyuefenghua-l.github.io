@@ -4,6 +4,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const latestSoftwareContainer = document.getElementById('latest-software');
     
     // --- 1. 软件数据 (从 software.js 复制所有数据，并取前 3 个) ---
+    // NOTE: This list is likely outdated if data/software.json is updated. 
+    // It's better to fetch the data dynamically if it changes, but keeping it simple for home.js for now.
     const softwareList = [
         {
             id: 1,
@@ -25,7 +27,7 @@ document.addEventListener('DOMContentLoaded', function() {
             id: 3,
             name: '浏览器',
             description: '流行网页浏览器。',
-            icon: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgd2lkdGg9IjI0IiBoZWlnaHQ9IjI0Ij48cGF0aCBkPSJNMTIgMkM2LjQ4IDIgMiA2LjQ4IDIgMTJzNC40OCAxMCAxMCAxMCAxMC00LjQ4IDEwLTEwLTQuNDgtMTAtMTAtMTB6bTEwIDhMMTIgMTJMNCAxMGg4djJ6bTAgMGg4di0yaC04di00aDJ2Mmg2eiIgZmlsbD0iI0ZGRiIvPjxwYXRoIGQ9Ik0xMiA0QzcuNTggNCA0IDcuNTggNCAxMnM0LjU4IDEwIDEwIDEwIDEwLTQuNTggMTAtMTAtNC41OC0xMC0xMC0xMHoiIGZpbGw9IiMzMzMzMzMiLz48cGF0aCBkPSJNMTIgNnM0Ljk3IDAgOSA0LjAzIDkgOXMtNCA0LjAzLTkgOS05LTQtOS05eiIgZmlsbD0iI0ZGRiIvPjxwYXRoIGQ9Ik0xMiA2czQuOTcgMCA5IDQuMDMgOSA5cy00IDQuMDMtOSA5LTktNC05LTktNC4wMy05LTktOXoiIGZpbGw9IiMzMzMzMzMiLz48cGF0aCBkPSJNMTIgNnM0Ljk3IDAgOSA0LjAzIDkgOXMtNCA0LjAzLTkgOS05LTQtOS05LS4wMy05LTktOXoiIGZpbGw9IiNGRkYiLz48cGF0aCBkPSJNMTIgNnM0Ljk3IDAgOSA0LjAzIDkgOXMtNCA0LjAzLTkgOS05LTQtOS05LTQuMDMtOS05LTl6IiBmaWxsPSIjMzMzMzMzIi8+PHBhdGggZD0iTTEyIDZzNC45NyAwOSA0LjAzIDkgOXMtNCA0LjAzLTkgOS05LTQtOS05LTQuMDMtOS05LTl6IiBmaWxsPSIjRkZGIi8+PHBhdGggZD0iTTEyIDZzNC45NyAwOSA0LjAzIDkgOXMtNCA0LjAzLTkgOS05LTQtOS05LTQuMDMtOS05LTl6IiBmaWxsPSIjMzMzMzMzIi8+PC9zdmc+',
+            icon: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgd2lkdGg9IjI0IiBoZWlnaHQ9IjI0Ij48cGF0aCBkPSJNMTIgMkM2LjQ4IDIgMiA2LjQ4IDIgMTJzNC40OCAxMCAxMCAxMCAxMC00LjQ4IDEwLTEwLTQuNDgtMTAtMTAtMTB6bTEwIDhMMTIgMTJMNCAxMGg4djJ6bTAgMGg4di0yaC04di00aDJ2Mmg2eiIgZmlsbD0iI0ZGRiIvPjxwYXRoIGQ9Ik0xMiA0QzcuNTggNCA0IDcuNTggNCAxMnM0LjU4IDEwIDEwIDEwIDEwLTQuNTggMTAtMTAtNC41OC0xMC0xMC0xMHoiIGZpbGw9IiMzMzMzMzMiLz48cGF0aCBkPSJNMTIgNnM0Ljk3IDAgOSA0LjAzIDkgOXMtNCA0LjAzLTkgOS05LTQtOS05eiIgZmlsbD0iI0ZGRiIvPjxwYXRoIGQ9Ik0xMiA2czQuOTcgMCA5IDQuMDMgOSA5cy00IDQuMDMtOSA5LTktNC05LTktNC4wMy05LTktOXoiIGZpbGw9IiMzMzMzMzMiLz48cGF0aCBkPSJNMTIgNnM0Ljk3IDAgOSA0LjAzIDkgOXMtNCA0LjAzLTkgOS05LTQtOS05LS4wMy05LTktOXoiIGZpbGw9IiNGRkYiLz48cGF0aCBkPSJNMTIgNnM0Ljk3IDAgOSA0LjAzIDkgOXMtNCA0LjAzLTkgOS05LTQtOS05LTQuMDMtOS05LTl6IiBmaWxsPSIjMzMzMzMzIi8+PHBhdGggZD0iTTEyIDZzNC45NyAwOSA0LjAzIDkgOXMtNCA0LjAzLTkgOS05LTQtOS05LTQuMDMtOS05LTl6IiBmaWxsPSIjRkZGIi8+PHBhdGggZD0iTTEyIDZzNC45NyAwOSA0LjAzIDkgOXMtNCA0LjAzLTkgOS05LTQtOS05LTQuMDMtOS05LTl6IiBmaWxsPSIjMzMzMzMzIiIvPjwvc3ZnPg==',
             category: 'browser',
             website: '#'
         }
@@ -34,7 +36,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // --- 2. 加载最新文章 ---
     async function loadLatestArticles() {
         // 相对路径：articles/index.json
-        const ARTICLE_INDEX_URL = './articles/index.json';
+        const ARTICLE_INDEX_URL = './data/articles.json';
         latestArticlesContainer.innerHTML = '<li class="loading"><i class="fas fa-spinner fa-spin"></i> 正在加载文章...</li>';
 
         try {
@@ -57,8 +59,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 const li = document.createElement('li');
                 // 标题从文件名中去除 .md
                 const title = article.file.replace('.md', '');
-                // 链接到博客页面 (pages/blog.html)
-                li.innerHTML = `<a href="./pages/blog.html">${title} <span class="article-date">(${article.date})</span></a>`;
+                // 修复：将日期显示为右浮动的小标签
+                li.innerHTML = `<a href="./pages/blog.html">${title}</a><span class="article-date">${article.date}</span>`;
                 latestArticlesContainer.appendChild(li);
             });
 

@@ -29,23 +29,29 @@
 
     <main>
         <div class="container">
-            <section class="intro">
-                <h2>欢迎来到我的GitHub静态页面</h2>
-                <p>这是一个基于GitHub Pages的静态博客和软件收集平台。您可以在这里查看我的博客文章，以及我收集的各种实用软件。</p>
-                <div class="features">
-                    <div class="feature">
-                        <i class="fas fa-file-alt"></i>
-                        <h3>博客记录</h3>
-                        <p>浏览我的技术文章和心得体会，所有文章均以Markdown格式编写。</p>
-                        <a href="./pages/blog.html" class="btn">查看博客</a>
-                    </div>
-                    <div class="feature">
-                        <i class="fas fa-download"></i>
-                        <h3>软件收集</h3>
-                        <p>发现我精心挑选的各类实用软件，包括开发工具、设计软件和日常应用。</p>
-                        <a href="./pages/software.html" class="btn">浏览软件</a>
+            <section class="latest-content">
+                <h2>最新内容</h2>
+                
+                <div class="content-section">
+                    <h3><i class="fas fa-file-alt"></i> 最新博客文章</h3>
+                    <ul class="article-list-home" id="latest-articles">
+                        <li class="loading">加载中...</li>
+                    </ul>
+                    <div class="more-link">
+                        <a href="./pages/blog.html" class="btn-more">更多文章 <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
+
+                <div class="content-section">
+                    <h3><i class="fas fa-download"></i> 最新软件收集</h3>
+                    <div class="software-grid-home" id="latest-software">
+                        <div class="loading">加载中...</div>
+                    </div>
+                    <div class="more-link">
+                        <a href="./pages/software.html" class="btn-more">更多软件 <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
             </section>
         </div>
     </main>
@@ -57,5 +63,5 @@
     </footer>
 
     <script src="assets/js/theme.js"></script>
-</body>
+    <script src="assets/js/home.js"></script> </body>
 </html>

@@ -9,7 +9,8 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // 存储从 JSON 加载的文章元数据
     let articles = [];
-    const ARTICLE_INDEX_URL = '../articles/index.json';
+    // 修正路径：相对 pages/blog.html 应该在 ../data/articles.json
+    const ARTICLE_INDEX_URL = '../data/articles.json'; 
     
     // 初始化页面
     function init() {
@@ -17,6 +18,15 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(() => {
                 renderArticleList();
                 setupEventListeners();
+                // 默认加载第一篇文章
+                if (articles.length > 0) {
+                    loadArticle(articles[0].id);
+                    // 确保列表中的第一篇文章被标记为活动状态
+                    const firstArticleLink = document.querySelector('.article-list a[data-id="' + articles[0].id + '"]');
+                    if (firstArticleLink) {
+                        firstArticleLink.classList.add('active');
+                    }
+                }
             });
     }
 
@@ -34,7 +44,8 @@ document.addEventListener('DOMContentLoaded', function() {
             articles = data.map(article => ({
                 id: article.file.replace('.md', ''), // 使用文件名作为ID
                 title: article.file.replace('.md', ''),
-                file: `../articles/${article.file}`, // 修正路径到实际的Markdown文件
+                // 修正 Markdown 文件路径：相对 pages/blog.html 应该在 ../data/articles/
+                file: `../data/articles/${article.file}`, 
                 date: article.date 
             }));
 
@@ -66,8 +77,8 @@ document.addEventListener('DOMContentLoaded', function() {
         
         filteredArticles.forEach(article => {
             const li = document.createElement('li');
-            // 显示标题和日期
-            li.innerHTML = `<a href="#" data-id="${article.id}">${article.title} <span class="article-date">(${article.date})</span></a>`;
+            // 修复：将日期显示为右浮动的小标签，并在链接上添加 title 属性用于悬浮提示
+            li.innerHTML = `<a href="#" data-id="${article.id}" title="${article.title}">${article.title}</a><span class="article-date">${article.date}</span>`;
             articleList.appendChild(li);
             
             // 添加点击事件
@@ -87,6 +98,10 @@ document.addEventListener('DOMContentLoaded', function() {
         const article = articles.find(a => a.id === articleId);
         if (!article) return;
         
+        // 隐藏欢迎信息
+        const welcomeMessage = document.querySelector('.welcome-message');
+        if (welcomeMessage) welcomeMessage.style.display = 'none';
+
         // 显示加载状态
         articleContent.innerHTML = '<div class="loading"><i class="fas fa-spinner fa-spin"></i> 正在加载内容...</div>';
         tocContainer.style.display = 'none'; // 隐藏目录直到内容加载完成
@@ -101,14 +116,14 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .then(text => {
             // 1. 修正图片相对路径 (满足本地编辑习惯)
-            // 将 Markdown 中的相对路径 `(./` 替换为 `(../articles/`。
-            // 这样在 pages/blog.html 中才能正确访问 articles/ 目录下的图片。
-            let correctedText = text.replace(/\(\.\//g, '(../articles/');
+            // 将 Markdown 中的相对路径 `(./` 替换为 `(../data/articles/`。
+            // 这样在 pages/blog.html 中才能正确访问 data/articles/ 目录下的图片。
+            let correctedText = text.replace(/\(\.\//g, '(../data/articles/');
 
             // 2. 处理 HTML 格式的绝对路径（如 <img src="D:\Data\...），将其替换为提示信息
             // 匹配 <img src="D:\..." ... /> 或 <img src="C:\..." ... />
             correctedText = correctedText.replace(/<img\s+src=["']([a-z]:\\|file:\/\/\/).*?["'](.*?)>/gi, 
-                (match, p1, p2) => `<div class="image-load-error">图片使用了本地绝对路径，无法显示。请上传图片文件并使用相对路径。</div>`
+                (match, p1, p2) => `<div class="image-load-error">图片使用了本地绝对路径或文件协议，无法显示。请上传图片文件并使用相对路径。</div>`
             );
 
             // 使用marked解析Markdown
@@ -136,7 +151,7 @@ document.addEventListener('DOMContentLoaded', function() {
             });
             
             // 生成目录
-            generateTOC(articleContent, correctedText); // 使用 correctedText 来生成目录
+            generateTOC(articleContent, correctedText); 
         })
             .catch(error => {
                 articleContent.innerHTML = `<div class="error">加载文章失败: ${error.message}</div>`;
@@ -144,7 +159,7 @@ document.addEventListener('DOMContentLoaded', function() {
             });
     }
     
-    // 生成目录
+    // 生成目录 (保持不变)
     function generateTOC(contentElement, markdown) {
         const headers = [];
         const lines = markdown.split('\n');
