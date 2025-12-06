@@ -68,6 +68,20 @@ document.addEventListener('DOMContentLoaded', function() {
         // 使用 onerror 属性处理图片加载失败
         const iconHtml = `<img src="${iconSrc}" alt="${software.name} Icon" onerror="this.onerror=null; this.src='${fallbackIcon}'">`;
 
+        // NEW: 构建链接 HTML
+        let linksHtml = '';
+        
+        // 1. 官方网站链接 (原有的 '官网下载' 改为 '官方网站')
+        // 使用 fa-external-link-alt 图标
+        linksHtml += `<a href="${software.website}" target="_blank" rel="noopener noreferrer" class="link-website"><i class="fas fa-external-link-alt"></i> 官方网站</a>`;
+
+        // 2. NEW: 直接下载按钮
+        // 检查 download 字段是否存在且非空
+        if (software.download && software.download.trim() !== "") {
+            // 使用 fa-download 图标，并添加 link-download 类
+            linksHtml += `<a href="${software.download}" target="_blank" rel="noopener noreferrer" class="link-download"><i class="fas fa-download"></i> 直接下载</a>`;
+        }
+        
         // NEW: 移除原有的 software-icon 块，将图标和标题放在 software-info 内部的 software-title-line 中
         card.innerHTML = `
             <div class="software-info">
@@ -81,7 +95,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 <span class="software-date-full">收录于: ${software.date}</span>
                 <p>${software.description}</p>
                 <div class="software-links">
-                    <a href="${software.website}" target="_blank"><i class="fas fa-download"></i> 官网下载</a>
+                    ${linksHtml}
                 </div>
             </div>
         `;

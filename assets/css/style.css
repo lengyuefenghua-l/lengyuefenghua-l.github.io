@@ -582,7 +582,10 @@ main {
     display: flex;
     align-items: center; /* 垂直居中对齐图标和标题 */
     padding: 10px 20px; /* 增加顶部和底部的内边距 */
-    background-color: var(--border-color); /* 保持顶部的背景色 */
+    /* 修改背景色为 nav-bg，使其更亮 */
+    background-color: var(--nav-bg); 
+    /* 增加顶部圆角 */
+    border-radius: 8px 8px 0 0; 
     margin-bottom: 0; /* 确保它紧贴 software-info body */
 }
 
@@ -715,23 +718,51 @@ main {
 
 .software-links {
   display: flex;
-  justify-content: space-between;
+  /* NEW: 按钮之间增加 10px 间距 */
+  gap: 10px; 
   margin-top: auto; /* NEW: 将链接区域推到底部 */
 }
 
 .software-links a {
-  flex: 1;
+  /* 确保按钮能够平均分配空间 */
+  flex: 1 1 0%;
   text-align: center;
   padding: 8px;
-  background-color: var(--btn-bg);
-  color: white;
+  /* 统一按钮的非悬浮状态样式 */
+  background-color: var(--nav-bg); 
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
   border-radius: 4px;
   text-decoration: none;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* NEW: 官方网站按钮样式 - 简化为基础样式，只处理悬浮 */
+.software-links a.link-website {
+    /* 使用通用的 .software-links a 样式 */
+}
+
+.software-links a.link-website:hover {
+    /* 悬浮时高亮 */
+    background-color: var(--highlight); 
+    color: white;
+    border-color: var(--highlight);
+}
+
+/* NEW: 直接下载按钮样式 - 简化为基础样式，只处理悬浮 */
+.software-links a.link-download {
+    /* 使用通用的 .software-links a 样式 */
+}
+
+.software-links a.link-download:hover {
+    /* 悬浮时高亮 */
+    background-color: var(--highlight); 
+    color: white;
+    border-color: var(--highlight);
 }
 
 .software-links a:hover {
-  background-color: var(--btn-hover);
+  text-decoration: none;
 }
 
 /* NEW: 首页软件日期样式 (保留，因为它用于 home.js 渲染的卡片) */

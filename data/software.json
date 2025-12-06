@@ -6,6 +6,7 @@
         "icon": "https://icon.bqb.cool/?url=https://weixin.qq.com/",
         "category": "装机必备",
         "website": "https://weixin.qq.com/",
+        "download":"https://dldir1v6.qq.com/weixin/Universal/Windows/WeChatWin_4.1.5.exe",
         "date": "2025-12-05"
     },
     {
@@ -15,6 +16,7 @@
         "icon": "https://upload.wikimedia.org/wikipedia/zh/f/f2/Bandizip.png",
         "category": "装机必备",
         "website": "https://www.bandisoft.com/bandizip/",
+        "download":"https://www.bandisoft.com/bandizip/dl.php?old",
         "date": "2025-12-05"
     },
     {
@@ -24,6 +26,7 @@
         "icon": "https://icon.bqb.cool/?url=https://otp.landian.vip/zh-cn/#",
         "category": "装机必备",
         "website": "https://otp.landian.vip/zh-cn/#",
+        "download":"https://otp.landian.vip/redirect/download.php?type=runtime&arch=x64",
         "date": "2025-12-05"
     },
     {
@@ -33,6 +36,7 @@
         "icon": "https://www.hibitsoft.ir/images/Uninstaller-icon.png",
         "category": "装机必备",
         "website": "https://www.hibitsoft.ir/Uninstaller.html",
+        "download":"HiBitUninstaller/HiBitUninstaller-setup-3.2.70.exe",
         "date": "2025-12-05"
     },
     {
@@ -42,6 +46,7 @@
         "icon": "https://www.sumatrapdfreader.org/favicon.ico",
         "category": "装机必备",
         "website": "https://www.sumatrapdfreader.org/free-pdf-reader",
+        "download":"https://www.sumatrapdfreader.org/dl/rel/3.5.2/SumatraPDF-3.5.2-64-install.exe",
         "date": "2025-12-05"
     },
     {
@@ -51,6 +56,7 @@
         "icon": "https://www.snipaste.com/img/logo.svg",
         "category": "装机必备",
         "website": "https://zh.snipaste.com/",
+        "download":"https://dl.snipaste.com/win-x64-cn",
         "date": "2025-12-06"
     },
     {
@@ -60,6 +66,7 @@
         "icon": "https://ditto-cp.sourceforge.io/Ditto2.png",
         "category": "装机必备",
         "website": "https://sabrogden.github.io/Ditto/",
+        "download":"https://github.com/sabrogden/Ditto/releases/download/3.25.113.0/DittoSetup_3_25_113_0.exe",
         "date": "2025-12-06"
     },
     {
@@ -69,6 +76,7 @@
         "icon": "https://icon.bqb.cool/?url=https://www.voidtools.com",
         "category": "装机必备",
         "website": "https://www.voidtools.com/zh-cn/",
+        "download":"https://www.voidtools.com/Everything-1.4.1.1030.x86-Setup.exe",
         "date": "2025-12-06"
     },
     {
@@ -78,6 +86,7 @@
         "icon": "https://icon.bqb.cool/?url=https://potplayer.tv/?lang=zh_CN",
         "category": "影音视听",
         "website": "https://potplayer.tv/?lang=zh_CN",
+        "download":"https://t1.daumcdn.net/potplayer/PotPlayer/Version/Latest/PotPlayerSetup64.exe",
         "date": "2025-12-06"
     },
     {
@@ -87,6 +96,7 @@
         "icon": "https://github.com/fluidicon.png",
         "category": "影音视听",
         "website": "https://listen1.github.io/listen1/",
+        "download":"https://github.com/listen1/listen1_desktop/releases/download/v2.33.0/listen1_2.33.0_win.exe",
         "date": "2025-12-06"
     },
     {
@@ -96,6 +106,7 @@
         "icon": "data:image/webp;base64,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",
         "category": "神奇软件",
         "website": "https://www.microsoft.com/en-us/download/details.aspx?id=35460",
+        "download":"https://download.microsoft.com/download/6/5/8/658afc4c-dc02-4cb8-839d-10253e89fff7/MouseWithoutBordersSetup.msi",
         "date": "2025-12-06"
     },
     {
@@ -105,6 +116,7 @@
         "icon": "https://www.ibik.ru/template/multiseat_12_03/favicon.ico",
         "category": "神奇软件",
         "website": "https://www.ibik.ru/",
+        "download":"https://www.ibik.ru/download/Aster/v2_70/Setup_ASTER27022.exe",
         "date": "2025-12-06"
     },
     {
@@ -114,6 +126,7 @@
         "icon": "https://images.sftcdn.net/images/t_app-logo-l,f_auto/p/01f85387-4a77-4306-8311-28ef75d1c3dc/645673576/dukto-dukto-icon-64-64x64.png",
         "category": "神奇软件",
         "website": "https://www.msec.it/blog/dukto/",
+        "download":"https://github.com/xuzhen/dukto/releases/download/v6.2.0/dukto_6.2_windows_x64_qt5.7z",
         "date": "2025-12-05"
     },
     {
@@ -123,6 +136,7 @@
         "icon": "https://freevirtualserialports.com/images/icons/icon-32x32-free-virtual-serial-ports.svg",
         "category": "编程开发",
         "website": "https://freevirtualserialports.com/",
+        "download":"https://freevirtualserialports.com/download/free-virtual-serial-port-tools.exe",
         "date": "2025-12-05"
     },
     {
@@ -132,6 +146,7 @@
         "icon": "https://www.virtual-serial-port.org/images/upload/index/vspd-icon-1@2x.png",
         "category": "编程开发",
         "website": "https://www.virtual-serial-port.org/",
+        "download":"https://cdn.electronic.us/products/vspd/windows/download/vspd.exe",
         "date": "2025-12-05"
     },
     {
@@ -141,6 +156,7 @@
         "icon": "https://com0com.sourceforge.net/favicon.ico",
         "category": "编程开发",
         "website": "https://com0com.sourceforge.net",
+        "download":"hhttps://sf-west-interserver-2.dl.sourceforge.net/project/com0com/com0com/3.0.0.0/com0com-3.0.0.0-i386-and-x64-signed.zip?viasf=1",
         "date": "2025-12-05"
     },
     {
@@ -150,6 +166,7 @@
         "icon": "http://www.ifreehub.com/image_bed/upload//l_IUV8bODji6Ykb_GV5opSNeGlloQLde8MvxEiBNT0A.png",
         "category": "编程开发",
         "website": "https://github.com/vesamount/O-ComTool",
+        "download":"https://github.com/vesamount/O-ComTool/releases/download/v2.1.1/O-ComTool_Pro.exe",
         "date": "2025-12-05"
     },
     {
@@ -158,7 +175,8 @@
         "details": "ToYcon 是一款免费且便携的 Windows 图标转换工具，支持多种图像格式与图标格式之间的相互转换。它允许用户将常见的图像格式（如 PNG、JPG、BMP 等）转换为 ICO 图标格式，反之亦然。此外，ToYcon 还支持批量转换功能，用户可以一次性处理多个文件，提高工作效率。该工具界面简洁，操作简单，适合需要频繁处理图标文件的用户使用。",
         "icon": "https://images.sftcdn.net/images/t_app-logo-xl,f_auto/p/69b5c2fc-96d9-11e6-8169-00163ec9f5fa/3890360283/toycon-logo.png",
         "category": "其他工具",
-        "website": "ToYcon",
+        "website": "https://toyccon.en.softonic.com/",
+        "download":"https://gsf-fl.softonic.com/298/8fa/db2e5aa5105b5a1e5024ba14066afdc7fc/file?Expires=1765056112&Signature=d3b2e6b9abc4dc96a8a7ce0046eb43a953f5a4c3&url=https://toycon.en.softonic.com/&Filename=file",
         "date": "2025-12-05"
     },
     {
@@ -168,6 +186,7 @@
         "icon": "https://www.screentogif.com/img/logo.d2151712.png",
         "category": "其他工具",
         "website": "https://www.screentogif.com/",
+        "download":"https://github.com/NickeManarin/ScreenToGif/releases/download/2.42.1/ScreenToGif.2.42.1.Setup.x64.msi",
         "date": "2025-12-05"
     },
     {
@@ -177,6 +196,7 @@
         "icon": "https://store-images.s-microsoft.com/image/apps.65479.14470364654110687.44eb26bb-e246-49a4-a6af-d1e630129e17.bea8d899-8592-4070-a568-51511cee1668?h=170",
         "category": "其他工具",
         "website": "https://github.com/chaohershi/cclose",
+        "download":"https://github.com/chaohershi/cclose/releases/download/v1.4.1.0/CClose.Setup.exe",
         "date": "2025-12-05"
     }
 ]
