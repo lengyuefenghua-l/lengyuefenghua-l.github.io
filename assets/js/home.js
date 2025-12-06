@@ -105,8 +105,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 return 0;
             });
             
-            // 获取前 3 篇
-            const latestArticles = data.slice(0, 3); 
+            // 获取前 6 篇
+            const latestArticles = data.slice(0, 6); 
 
             if (latestArticles.length === 0) {
                 latestArticlesContainer.innerHTML = '<li>目前没有可用的博客文章。</li>';
