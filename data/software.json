@@ -1,8 +1,8 @@
 [
-        {
+    {
         "name": "微信",
         "description": "微信，是一个生活方式",
-        "details":"微信，超过10亿人使用，能够通过网络给好友发送文字消息、表情和图片，还可以传送文件，与朋友视频聊天，让你的沟通更方便。 并提供有多种语言界面。。",
+        "details": "微信，超过10亿人使用，能够通过网络给好友发送文字消息、表情和图片，还可以传送文件，与朋友视频聊天，让你的沟通更方便。 并提供有多种语言界面。。",
         "icon": "https://icon.bqb.cool/?url=https://weixin.qq.com/",
         "category": "装机必备",
         "website": "https://weixin.qq.com/",
@@ -11,7 +11,7 @@
     {
         "name": "Bandizip",
         "description": "面向专业人士的压缩软件",
-        "details":"Bandizip 是一个强大的多功能压缩文件管理工具，可提供很快的解压缩速度和其他各种实用功能。这是一个免费的软件，其付费版本更是可以使用更多的实用功能。",
+        "details": "Bandizip 是一个强大的多功能压缩文件管理工具，可提供很快的解压缩速度和其他各种实用功能。这是一个免费的软件，其付费版本更是可以使用更多的实用功能。",
         "icon": "https://upload.wikimedia.org/wikipedia/zh/f/f2/Bandizip.png",
         "category": "装机必备",
         "website": "https://www.bandisoft.com/bandizip/",
@@ -20,7 +20,7 @@
     {
         "name": "Office Tool Plus",
         "description": "面向专业人士的压缩软件",
-        "details":"Bandizip 是一个强大的多功能压缩文件管理工具，可提供很快的解压缩速度和其他各种实用功能。这是一个免费的软件，其付费版本更是可以使用更多的实用功能。",
+        "details": "Bandizip 是一个强大的多功能压缩文件管理工具，可提供很快的解压缩速度和其他各种实用功能。这是一个免费的软件，其付费版本更是可以使用更多的实用功能。",
         "icon": "https://icon.bqb.cool/?url=https://otp.landian.vip/zh-cn/#",
         "category": "装机必备",
         "website": "https://otp.landian.vip/zh-cn/#",
@@ -29,7 +29,7 @@
     {
         "name": "HiBit Uninstaller",
         "description": "彻底卸载顽固软件、Windows 应用及浏览器扩展",
-        "details":"HiBit 卸载工具是卸载 Windows 软件的完美解决方案，让您能够通过其简单且用户友好的界面快速、彻底地卸载程序。",
+        "details": "HiBit 卸载工具是卸载 Windows 软件的完美解决方案，让您能够通过其简单且用户友好的界面快速、彻底地卸载程序。",
         "icon": "https://www.hibitsoft.ir/images/Uninstaller-icon.png",
         "category": "装机必备",
         "website": "https://www.hibitsoft.ir/Uninstaller.html",
@@ -38,7 +38,7 @@
     {
         "name": "Sumatra PDF",
         "description": "最好用的PDF文件查看器，体积小巧，极速启动",
-        "details":"PDF, eBook (epub, mobi), comic book (cbz/cbr), DjVu, XPS, CHM, image viewer for Windows.PDF、电子书（epub、mobi）、漫画书（cbz/cbr）、DjVu、XPS、CHM、图像查看器，适用于 Windows。Fast, small, packed with features, customizable, free.快速、小巧、功能丰富、可定制、免费。",
+        "details": "PDF, eBook (epub, mobi), comic book (cbz/cbr), DjVu, XPS, CHM, image viewer for Windows.PDF、电子书（epub、mobi）、漫画书（cbz/cbr）、DjVu、XPS、CHM、图像查看器，适用于 Windows。Fast, small, packed with features, customizable, free.快速、小巧、功能丰富、可定制、免费。",
         "icon": "https://www.sumatrapdfreader.org/favicon.ico",
         "category": "装机必备",
         "website": "https://www.sumatrapdfreader.org/free-pdf-reader",
@@ -47,25 +47,79 @@
     {
         "name": "Snipaste",
         "description": "Snipaste 是一个简单但强大的截图工具，也可以让你将截图贴回到屏幕上！",
-        "details":"Snipaste 是一个简单但强大的截图工具，也可以让你将截图贴回到屏幕上！下载并打开 Snipaste，按下 F1 来开始截图，再按 F3，截图就在桌面置顶显示了。就这么简单！你还可以将剪贴板里的文字或者颜色信息转化为图片窗口，并且将它们进行缩放、旋转、翻转、设为半透明，甚至让鼠标能穿透它们！如果你是程序员、设计师，或者是大部分工作时间都在电脑前，贴图功能将改变你的工作方式、提升工作效率。",
+        "details": "Snipaste 是一个简单但强大的截图工具，也可以让你将截图贴回到屏幕上！下载并打开 Snipaste，按下 F1 来开始截图，再按 F3，截图就在桌面置顶显示了。就这么简单！你还可以将剪贴板里的文字或者颜色信息转化为图片窗口，并且将它们进行缩放、旋转、翻转、设为半透明，甚至让鼠标能穿透它们！如果你是程序员、设计师，或者是大部分工作时间都在电脑前，贴图功能将改变你的工作方式、提升工作效率。",
         "icon": "https://www.snipaste.com/img/logo.svg",
         "category": "装机必备",
         "website": "https://zh.snipaste.com/",
         "date": "2025-12-06"
     },
-     {
+    {
         "name": "Ditto",
         "description": "Ditto 是标准 Windows 剪贴板的扩展。可以记录你复制的所有内容，方便你以后访问这些内容。",
-        "details":"Ditto 是标准 Windows 剪贴板的扩展。它保存剪贴板上的每一项，方便你以后访问这些内容。Ditto 允许你保存任何可以放到剪贴板上的信息，比如文本、图片、html、自定义格式。",
+        "details": "Ditto 是标准 Windows 剪贴板的扩展。它保存剪贴板上的每一项，方便你以后访问这些内容。Ditto 允许你保存任何可以放到剪贴板上的信息，比如文本、图片、html、自定义格式。",
         "icon": "https://ditto-cp.sourceforge.io/Ditto2.png",
         "category": "装机必备",
         "website": "https://sabrogden.github.io/Ditto/",
         "date": "2025-12-06"
     },
     {
+        "name": "Everything",
+        "description": "基于名称快速定位文件和文件夹。",
+        "details": "Ditto 是标准 Windows 剪贴板的扩展。它保存剪贴板上的每一项，方便你以后访问这些内容。Ditto 允许你保存任何可以放到剪贴板上的信息，比如文本、图片、html、自定义格式。",
+        "icon": "https://icon.bqb.cool/?url=https://www.voidtools.com",
+        "category": "装机必备",
+        "website": "https://www.voidtools.com/zh-cn/",
+        "date": "2025-12-06"
+    },
+    {
+        "name": "Potplayer",
+        "description": "Windows下强大的视频播放器",
+        "details": "PotPlayer 是 Win 平台免费全能播放器，解码能力强且支持硬件加速，兼容多数音视频格式及 4K、HDR 等高清片源，播放流畅且占用资源少，还具备字幕调整、倍速播放等实用功能，支持 3D 播放。它无广告无捆绑，体积小巧启动快，可更换皮肤、自定义快捷键，还能加载第三方滤镜与解码器，扩展性强。",
+        "icon": "https://icon.bqb.cool/?url=https://potplayer.tv/?lang=zh_CN",
+        "category": "影音视听",
+        "website": "https://potplayer.tv/?lang=zh_CN",
+        "date": "2025-12-06"
+    },
+    {
+        "name": "Listen 1",
+        "description": "Listen 1 可以搜索和播放来自多个主流音乐网站的歌曲，让你的曲库更全面。并支持收藏功能，方便的创建自己的歌单。",
+        "details": "Listen 1可以搜索和播放来自网易云音乐，QQ音乐，酷狗音乐，酷我音乐，Bilibili，咪咕音乐网站的歌曲，让你的曲库更全面。",
+        "icon": "https://github.com/fluidicon.png",
+        "category": "影音视听",
+        "website": "https://listen1.github.io/listen1/",
+        "date": "2025-12-06"
+    },
+    {
+        "name": "无界鼠标",
+        "description": "微软官方出品的局域网键鼠共享软件，可以让键鼠在多台电脑之间无缝切换，最多支持四台电脑。",
+        "details": "无界鼠标是一款让你成为电脑舰队指挥官的产品，它允许你使用一个鼠标和键盘控制多达四台电脑。这意味着，使用无界鼠标，你可以跨电脑复制文本或拖放文件。",
+        "icon": "data:image/webp;base64,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",
+        "category": "神奇软件",
+        "website": "https://www.microsoft.com/en-us/download/details.aspx?id=35460",
+        "date": "2025-12-06"
+    },
+    {
+        "name": "Aster",
+        "description": "俄罗斯极客开发的基于windows多账户的多人一机软件，两个人在一台电脑各玩各的不再是梦。",
+        "details": "Aster 是一款可以让多用户同时使用一台电脑的软件。每个用户都可以拥有自己的显示器、键盘和鼠标，从而实现多人同时使用一台电脑的功能。Aster 支持多种操作系统，包括 Windows 10、Windows 8、Windows 7 和 Windows Server 2016/2012/2008。",
+        "icon": "https://www.ibik.ru/template/multiseat_12_03/favicon.ico",
+        "category": "神奇软件",
+        "website": "https://www.ibik.ru/",
+        "date": "2025-12-06"
+    },
+    {
+        "name": "Dukto R6",
+        "description": "一款开源的跨平台局域网文件传输工具，支持自动发现设备，操作简单。",
+        "details": "界面简洁、可以自动发现,高速文件传输,多文件和文件夹传输,发送和接收文本片段,免费和开源，跨平台支持Windows、Mac OS X、Linux和Android。",
+        "icon": "https://images.sftcdn.net/images/t_app-logo-l,f_auto/p/01f85387-4a77-4306-8311-28ef75d1c3dc/645673576/dukto-dukto-icon-64-64x64.png",
+        "category": "神奇软件",
+        "website": "https://www.msec.it/blog/dukto/",
+        "date": "2025-12-05"
+    },
+    {
         "name": "虚拟串口-FVSP",
         "description": "Free Virtual Serial Ports 是一款用于 Windows 平台的软件 COM 端口仿真工具。",
-        "details":"我们的免费虚拟串口工具包允许您创建虚拟COM端口，并使用基于软件的虚拟无调制解调器线缆成对连接。它还允许使用命名管道技术将创建的端口连接到串行应用程序或虚拟串行设备。每个虚拟COM端口精确模拟物理串口的参数和行为。因此，你的通信应用与这些端口的交互方式与硬件端口完全相同。这款免费的虚拟串口模拟器支持Windows 10 64位和32位，以及从Windows Vista开始的所有现代Windows桌面和服务器平台（包括Windows 11）。",
+        "details": "我们的免费虚拟串口工具包允许您创建虚拟COM端口，并使用基于软件的虚拟无调制解调器线缆成对连接。它还允许使用命名管道技术将创建的端口连接到串行应用程序或虚拟串行设备。每个虚拟COM端口精确模拟物理串口的参数和行为。因此，你的通信应用与这些端口的交互方式与硬件端口完全相同。这款免费的虚拟串口模拟器支持Windows 10 64位和32位，以及从Windows Vista开始的所有现代Windows桌面和服务器平台（包括Windows 11）。",
         "icon": "https://freevirtualserialports.com/images/icons/icon-32x32-free-virtual-serial-ports.svg",
         "category": "编程开发",
         "website": "https://freevirtualserialports.com/",
@@ -74,7 +128,7 @@
     {
         "name": "虚拟串口-VSPD",
         "description": "Virtual Serial Port Driver 是一款虚拟 COM 端口驱动程序是一项强大的技术，专为那些开发、测试或调试串口软件和硬件的人员设计。",
-        "details":"允许创建大量虚拟 COM 端口，并为您提供完全模拟串口行为的强大可能性。虚拟串口软件不仅仅是一个简单的 COM 端口模拟器。它提供灵活的端口创建、分割、共享和合并真实串口的功能，允许测试串口软件，支持控制线，并支持虚拟和物理 COM 端口之间的高速数据传输。各种应用程序可以通过使用连接在虚拟空端口电缆上的虚拟串口交换数据。从一个端口发送到另一个端口的串口数据将立即被接收。",
+        "details": "允许创建大量虚拟 COM 端口，并为您提供完全模拟串口行为的强大可能性。虚拟串口软件不仅仅是一个简单的 COM 端口模拟器。它提供灵活的端口创建、分割、共享和合并真实串口的功能，允许测试串口软件，支持控制线，并支持虚拟和物理 COM 端口之间的高速数据传输。各种应用程序可以通过使用连接在虚拟空端口电缆上的虚拟串口交换数据。从一个端口发送到另一个端口的串口数据将立即被接收。",
         "icon": "https://www.virtual-serial-port.org/images/upload/index/vspd-icon-1@2x.png",
         "category": "编程开发",
         "website": "https://www.virtual-serial-port.org/",
@@ -83,7 +137,7 @@
     {
         "name": "虚拟串口-com0com",
         "description": "Null-modem 模拟器是一个开源的 Windows 内核模式虚拟串口驱动程序，可在 GPL 许可证下免费使用。",
-        "details":"Null-modem 模拟器可用于为设备模拟器提供串行接口。在这种情况下，设备模拟程序使用一对中的一端，另一端可以由需要 COM 端口与设备通信的 Windows 或 DOS 应用程序使用。例如，要通过 IP 发送/接收传真，您可以通过虚拟 COM 端口对将 Windows 传真应用程序连接到 t38modem（T38FAX 伪调制解调器，t38modem 项目的一部分）。",
+        "details": "Null-modem 模拟器可用于为设备模拟器提供串行接口。在这种情况下，设备模拟程序使用一对中的一端，另一端可以由需要 COM 端口与设备通信的 Windows 或 DOS 应用程序使用。例如，要通过 IP 发送/接收传真，您可以通过虚拟 COM 端口对将 Windows 传真应用程序连接到 t38modem（T38FAX 伪调制解调器，t38modem 项目的一部分）。",
         "icon": "https://com0com.sourceforge.net/favicon.ico",
         "category": "编程开发",
         "website": "https://com0com.sourceforge.net",
@@ -92,11 +146,37 @@
     {
         "name": "串口调试-O-Comtool",
         "description": "O-Comtool是一款简单易用的串口调试助手，本软件提供了丰富的功能，有效提高嵌入式开发调试的效率。",
-        "details":"O-Comtool是一款简单易用的串口调试助手，本软件提供了丰富的功能，有效提高嵌入式开发调试的效率。",
+        "details": "O-Comtool是一款简单易用的串口调试助手，本软件提供了丰富的功能，有效提高嵌入式开发调试的效率。",
         "icon": "http://www.ifreehub.com/image_bed/upload//l_IUV8bODji6Ykb_GV5opSNeGlloQLde8MvxEiBNT0A.png",
         "category": "编程开发",
         "website": "https://github.com/vesamount/O-ComTool",
         "date": "2025-12-05"
+    },
+    {
+        "name": "ToYcon",
+        "description": "ToYcon 是一款免费且便携的 Windows 图标转换工具，支持多种图像格式与图标格式之间的相互转换。",
+        "details": "ToYcon 是一款免费且便携的 Windows 图标转换工具，支持多种图像格式与图标格式之间的相互转换。它允许用户将常见的图像格式（如 PNG、JPG、BMP 等）转换为 ICO 图标格式，反之亦然。此外，ToYcon 还支持批量转换功能，用户可以一次性处理多个文件，提高工作效率。该工具界面简洁，操作简单，适合需要频繁处理图标文件的用户使用。",
+        "icon": "https://images.sftcdn.net/images/t_app-logo-xl,f_auto/p/69b5c2fc-96d9-11e6-8169-00163ec9f5fa/3890360283/toycon-logo.png",
+        "category": "其他工具",
+        "website": "ToYcon",
+        "date": "2025-12-05"
+    },
+    {
+        "name": "ScreenToGif",
+        "description": "ScreenToGif 是一款开源且免费的屏幕录制软件，允许用户录制屏幕活动并将其保存为 GIF 动画或视频文件。",
+        "details": "ScreenToGif 是一款开源且免费的屏幕录制软件，允许用户录制屏幕活动并将其保存为 GIF 动画或视频文件。该软件提供了多种录制选项，包括全屏录制、窗口录制和自定义区域录制，满足不同用户的需求。录制完成后，用户可以使用内置的编辑器对录制内容进行剪辑、添加文字、调整帧速率等操作，从而创建出符合需求的动画或视频。此外，ScreenToGif 还支持导出多种格式，方便用户在不同平台上分享和使用。",
+        "icon": "https://www.screentogif.com/img/logo.d2151712.png",
+        "category": "其他工具",
+        "website": "https://www.screentogif.com/",
+        "date": "2025-12-05"
+    },
+    {
+        "name": "CClose",
+        "description": "CClose 是一款用 AutoHotkey 编写的 Windows 实用工具。它可以帮助你更快、更轻松地操作窗口。它还允许你将窗口始终置顶。",
+        "details": "CClose 是一款用 AutoHotkey 编写的 Windows 实用工具。它可以帮助你更快、更轻松地操作窗口。它还允许你将窗口始终置顶。  主要功能： 关闭窗口：通过单击窗口右上角的关闭按钮或使用快捷键 Alt + F4，可以快速关闭当前活动窗口。 置顶窗口：通过单击窗口标题栏上的置顶按钮或使用快捷键 Ctrl + Alt + T，可以将当前活动窗口置顶，方便你在多个窗口之间切换时保持重要窗口可见。",
+        "icon": "https://store-images.s-microsoft.com/image/apps.65479.14470364654110687.44eb26bb-e246-49a4-a6af-d1e630129e17.bea8d899-8592-4070-a568-51511cee1668?h=170",
+        "category": "其他工具",
+        "website": "https://github.com/chaohershi/cclose",
+        "date": "2025-12-05"
     }
-
 ]
