@@ -159,10 +159,12 @@ document.addEventListener('DOMContentLoaded', function() {
             });
     }
     
-    // 生成目录 (保持不变)
+    // 生成目录 (修复：确保生成的锚点ID是唯一的)
     function generateTOC(contentElement, markdown) {
         const headers = [];
         const lines = markdown.split('\n');
+        // NEW: 用于存储已生成的锚点ID及其出现次数，以确保唯一性
+        const anchorMap = {}; 
         
         // 第一次遍历 Markdown 文本，提取标题文本
         lines.forEach(line => {
@@ -180,11 +182,20 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // 第二次遍历，处理文章内容中的标题，并生成目录
             headers.forEach(header => {
-                // 规范化标题文本，用于创建唯一的锚点ID
-                const anchor = header.text.toLowerCase()
+                // 规范化标题文本，用于创建锚点ID
+                let baseAnchor = header.text.toLowerCase()
                     .replace(/[^\w\s\u4e00-\u9fa5]/g, '') // 允许中文、字母、数字、空格
                     .replace(/\s+/g, '-');
                 
+                // 确保锚点ID唯一
+                let anchor = baseAnchor;
+                let count = anchorMap[baseAnchor] || 0;
+                
+                if (count > 0) {
+                    anchor = `${baseAnchor}-${count}`;
+                }
+                anchorMap[baseAnchor] = count + 1; // 更新计数
+
                 // 为文章中的标题元素添加ID
                 // 必须在 DOM 中找到对应的标题元素并设置 ID
                 const headerElements = contentElement.querySelectorAll(`h${header.level}`);
@@ -192,9 +203,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 headerElements.forEach(el => {
                     // 只有当元素的文本内容与解析出的标题文本精确匹配时，才设置ID
-                    // 这样可以避免给其他不相关的同级标题设置ID
+                    // 并且确保该元素尚未被设置 ID
                     if (el.textContent.trim() === header.text && !isIdSet) {
-                        el.id = anchor;
+                        el.id = anchor; // 使用唯一的 ID
                         isIdSet = true;
                     }
                 });

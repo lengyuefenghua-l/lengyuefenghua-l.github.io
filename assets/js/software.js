@@ -1,14 +1,12 @@
-// 软件收集功能JavaScript
-document.addEventListener('DOMContentLoaded', function() {
-    const softwareGrid = document.getElementById('software-grid');
-    const categoryButtons = document.querySelectorAll('.category-btn');
-    
-    // 存储从 JSON 加载的软件数据
-    let softwareList = [];
-    // 修正路径：相对 pages/software.html 应该在 ../data/software.json
-    const SOFTWARE_DATA_URL = '../data/software.json';
+// Software Page Dynamic Content Logic
 
-    // --- Tooltip Manager Functions (与 home.js 相同，确保一致性) ---
+document.addEventListener('DOMContentLoaded', function() {
+    const SOFTWARE_DATA_URL = '../data/software.json';
+    const softwareGrid = document.getElementById('software-grid');
+    const categoryFilter = document.getElementById('category-filter');
+    let softwareData = [];
+
+    // --- Tooltip Manager Functions (与 home.js 相同) ---
     // 负责创建、更新和定位全局 Tooltip
     function createAndShowTooltip(card, software) {
         // 1. 获取现有 Tooltip 或创建一个新的全局 Tooltip
@@ -24,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const tooltipContent = software.details || software.description;
         tooltip.innerHTML = `
             <div class="tooltip-header">
-                <div class="tooltip-icon"><img src="${software.icon}" alt="${software.name}"></div>
+                <div class="tooltip-icon"><img src="${software.icon}" alt="${software.name}" onerror="this.onerror=null; this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgd2lkdGg9IjI0IiBoZWlnaHQ9IjI0Ij48cGF0aCBkPSJNMTIgMkwyIDEySDVWMjBIMTlaTTcgMTguNUEyLjUgMi41IDAgMCAwIDkuNSAyMSAyLjUgMi41IDAgMCAwIDEyIDI0YTIuNSAyLjUgMCAwIDAgMi41LTIuNUExIDUgMCAwIDAgMTkgMjFIMTJaTTExIDExLjVMNyA3LjVIMTJWMTUuNUgxNFY2SDExWiIgZmlsbD0iIzY2NjY2NiIvPjwvc3ZnPg=='"></div>
                 <div class="tooltip-title">${software.name}</div>
             </div>
             <div class="tooltip-body">${tooltipContent}</div>
@@ -56,104 +54,124 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     // --- End Tooltip Manager Functions ---
-    
-    // 初始化页面
-    function init() {
-        loadSoftwareData().then(() => {
-            renderSoftwareList();
-            setupEventListeners();
+
+
+    // 创建单个软件卡片
+    function createSoftwareCard(software) {
+        const card = document.createElement('div');
+        card.className = 'software-card';
+
+        // 检查 icon 是否可用，提供备用图标
+        const iconSrc = software.icon;
+        const fallbackIcon = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgd2lkdGg9IjI0IiBoZWlnaHQ9IjI0Ij48cGF0aCBkPSJNMTIgMkwyIDEySDVWMjBIMTlaTTcgMTguNUEyLjUgMi41IDAgMCAwIDkuNSAyMSAyLjUgMi41IDAgMCAwIDEyIDI0YTIuNSAyLjUgMCAwIDAgMi41LTIuNUExIDUgMCAwIDAgMTkgMjFIMTJaTTExIDExLjVMNyA3LjVIMTJWMTUuNUgxNFY2SDExWiIgZmlsbD0iIzY2NjY2NiIvPjwvc3ZnPg==';
+        
+        // 使用 onerror 属性处理图片加载失败
+        const iconHtml = `<img src="${iconSrc}" alt="${software.name} Icon" onerror="this.onerror=null; this.src='${fallbackIcon}'">`;
+
+        card.innerHTML = `
+            <div class="software-icon">
+                ${iconHtml}
+            </div>
+            <div class="software-info">
+                <h3>${software.name}</h3>
+                <!-- NEW: 添加收录日期信息 -->
+                <span class="software-date-full">收录于: ${software.date}</span>
+                <p>${software.description}</p>
+                <div class="software-links">
+                    <a href="${software.website}" target="_blank"><i class="fas fa-download"></i> 官网下载</a>
+                </div>
+            </div>
+        `;
+
+        // 添加悬浮事件监听器
+        card.setAttribute('data-software-info', JSON.stringify(software));
+
+        card.addEventListener('mouseenter', function() {
+            const softwareData = JSON.parse(this.getAttribute('data-software-info'));
+            createAndShowTooltip(this, softwareData);
         });
         
-        // 添加一个全局事件监听器，用于在鼠标移出软件网格时隐藏 Tooltip
-        softwareGrid.addEventListener('mouseleave', hideTooltip);
+        card.addEventListener('mouseleave', hideTooltip);
+
+        return card;
     }
 
-    // 加载软件数据
-    async function loadSoftwareData() {
-        softwareGrid.innerHTML = '<div class="loading"><i class="fas fa-spinner fa-spin"></i> 正在加载软件数据...</div>';
+    // 渲染软件列表
+    function renderSoftware(filterCategory = 'All') {
+        softwareGrid.innerHTML = ''; // 清空现有内容
+        const filteredList = (filterCategory === 'All') 
+            ? softwareData
+            : softwareData.filter(software => software.category === filterCategory);
+
+        if (filteredList.length === 0) {
+            softwareGrid.innerHTML = '<p class="loading">此类别下暂无软件推荐。</p>';
+            return;
+        }
+        
+        // NEW: 默认按日期降序排序 (最新在前)
+        filteredList.sort((a, b) => {
+            const dateA = new Date(a.date);
+            const dateB = new Date(b.date);
+            return dateB - dateA; // 降序
+        });
+
+        filteredList.forEach(software => {
+            softwareGrid.appendChild(createSoftwareCard(software));
+        });
+    }
+
+    // 渲染分类按钮
+    function renderCategories() {
+        const categories = ['All'];
+        softwareData.forEach(software => {
+            if (!categories.includes(software.category)) {
+                categories.push(software.category);
+            }
+        });
+
+        categoryFilter.innerHTML = ''; // 清空现有按钮
+
+        categories.forEach(category => {
+            const button = document.createElement('button');
+            button.className = 'category-btn';
+            button.textContent = category;
+            
+            button.addEventListener('click', () => {
+                // 移除所有按钮的 active 类
+                document.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('active'));
+                // 给当前点击的按钮添加 active 类
+                button.classList.add('active');
+                renderSoftware(category);
+            });
+            
+            categoryFilter.appendChild(button);
+        });
+        
+        // 默认激活第一个按钮
+        if (categoryFilter.firstElementChild) {
+            categoryFilter.firstElementChild.classList.add('active');
+        }
+    }
+
+    // 初始化加载
+    async function init() {
+        softwareGrid.innerHTML = '<div class="loading"><i class="fas fa-spinner fa-spin"></i> 正在加载软件列表...</div>';
+        
         try {
             const response = await fetch(SOFTWARE_DATA_URL);
             if (!response.ok) {
                 throw new Error(`无法加载软件数据: ${response.statusText}`);
             }
-            softwareList = await response.json();
+            softwareData = await response.json();
+            
+            renderCategories();
+            renderSoftware('All'); // 默认渲染所有软件
+            
         } catch (error) {
             console.error('加载软件数据失败:', error);
-            softwareGrid.innerHTML = `<div class="error">软件加载失败: ${error.message}</div>`;
+            softwareGrid.innerHTML = `<div class="error">软件列表加载失败: ${error.message}</div>`;
         }
     }
-    
-    // 渲染软件列表
-    function renderSoftwareList(category = 'all') {
-        softwareGrid.innerHTML = '';
-        
-        // 如果数据为空，显示提示
-        if (softwareList.length === 0) {
-             softwareGrid.innerHTML = '<div class="loading">目前没有可用的软件记录。</div>';
-             return;
-        }
 
-        const filteredSoftware = category === 'all' 
-            ? softwareList 
-            // 筛选时直接使用 category 字段进行比较（支持中文）
-            : softwareList.filter(software => software.category === category);
-        
-        if (filteredSoftware.length === 0) {
-            softwareGrid.innerHTML = '<div class="loading">没有找到匹配的软件</div>';
-            return;
-        }
-        
-        filteredSoftware.forEach(software => {
-            const card = document.createElement('div');
-            card.className = 'software-card';
-
-            // 构造 Tooltip 内容
-            const tooltipContent = software.details || software.description;
-
-            card.innerHTML = `
-                <div class="software-icon">
-                    <img src="${software.icon}" alt="${software.name}" onerror="this.onerror=null; this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgd2lkdGg9IjI0IiBoZWlnaHQ9IjI0Ij48cGF0aCBkPSJNMTIgMkwyIDEySDVWMjBIMTlaTTcgMTguNUEyLjUgMi41IDAgMCAwIDkuNSAyMSAyLjUgMi41IDAgMCAwIDEyIDI0YTIuNSAyLjUgMCAwIDAgMi41LTIuNUExIDUgMCAwIDAgMTkgMjFIMTJaTTExIDExLjVMNyA3LjVIMTJWMTUuNUgxNFY2SDExWiIgZmlsbD0iIzY2NjY2NiIvPjwvc3ZnPg=='">
-                </div>
-                <div class="software-info">
-                    <h3>${software.name}</h3>
-                    <p>${software.description}</p>
-                    <div class="software-links">
-                        <a href="${software.website}" target="_blank"><i class="fas fa-download"></i> 官网下载</a>
-                    </div>
-                </div>
-            `;
-            
-            softwareGrid.appendChild(card);
-            
-            // NEW: 添加悬浮事件监听器，使用 data 属性存储信息
-            card.setAttribute('data-software-info', JSON.stringify(software));
-
-            card.addEventListener('mouseenter', function() {
-                const softwareData = JSON.parse(this.getAttribute('data-software-info'));
-                createAndShowTooltip(this, softwareData);
-            });
-            
-            card.addEventListener('mouseleave', hideTooltip);
-        });
-    }
-    
-    // 设置事件监听器
-    function setupEventListeners() {
-        // 分类筛选
-        categoryButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                const category = this.getAttribute('data-category');
-                
-                // 更新活动状态
-                categoryButtons.forEach(btn => btn.classList.remove('active'));
-                this.classList.add('active');
-                
-                // 渲染筛选后的列表
-                renderSoftwareList(category);
-            });
-        });
-    }
-    
-    // 初始化
     init();
 });

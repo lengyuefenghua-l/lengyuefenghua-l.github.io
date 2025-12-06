@@ -4,7 +4,7 @@
         "description": "Free Virtual Serial Ports 是一款用于 Windows 平台的软件 COM 端口仿真工具。",
         "details":"我们的免费虚拟串口工具包允许您创建虚拟COM端口，并使用基于软件的虚拟无调制解调器线缆成对连接。它还允许使用命名管道技术将创建的端口连接到串行应用程序或虚拟串行设备。每个虚拟COM端口精确模拟物理串口的参数和行为。因此，你的通信应用与这些端口的交互方式与硬件端口完全相同。这款免费的虚拟串口模拟器支持Windows 10 64位和32位，以及从Windows Vista开始的所有现代Windows桌面和服务器平台（包括Windows 11）。",
         "icon": "https://freevirtualserialports.com/images/icons/icon-32x32-free-virtual-serial-ports.svg",
-        "category": "development",
+        "category": "编程开发",
         "website": "https://freevirtualserialports.com/",
         "date": "2025-12-05"
     },
@@ -13,7 +13,7 @@
         "description": "Virtual Serial Port Driver 是一款虚拟 COM 端口驱动程序是一项强大的技术，专为那些开发、测试或调试串口软件和硬件的人员设计。",
         "details":"允许创建大量虚拟 COM 端口，并为您提供完全模拟串口行为的强大可能性。虚拟串口软件不仅仅是一个简单的 COM 端口模拟器。它提供灵活的端口创建、分割、共享和合并真实串口的功能，允许测试串口软件，支持控制线，并支持虚拟和物理 COM 端口之间的高速数据传输。各种应用程序可以通过使用连接在虚拟空端口电缆上的虚拟串口交换数据。从一个端口发送到另一个端口的串口数据将立即被接收。",
         "icon": "https://www.virtual-serial-port.org/images/upload/index/vspd-icon-1@2x.png",
-        "category": "development",
+        "category": "编程开发",
         "website": "https://www.virtual-serial-port.org/",
         "date": "2025-12-05"
     },
@@ -78,6 +78,6 @@
         "icon": "https://www.snipaste.com/img/logo.svg",
         "category": "装机必备",
         "website": "https://zh.snipaste.com/",
-        "date": "2025-12-05"
+        "date": "2025-12-06"
     }
 ]

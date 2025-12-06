@@ -3,6 +3,55 @@ document.addEventListener('DOMContentLoaded', function() {
     const latestArticlesContainer = document.getElementById('latest-articles');
     const latestSoftwareContainer = document.getElementById('latest-software');
     
+    // --- Tooltip Manager Functions (与 software.js 相同，支持全局 Tooltip) ---
+    // 负责创建、更新和定位全局 Tooltip
+    function createAndShowTooltip(card, software) {
+        // 1. 获取现有 Tooltip 或创建一个新的全局 Tooltip
+        let tooltip = document.getElementById('global-software-tooltip');
+        if (!tooltip) {
+            tooltip = document.createElement('div');
+            tooltip.id = 'global-software-tooltip';
+            tooltip.className = 'custom-tooltip';
+            document.body.appendChild(tooltip);
+        }
+        
+        // 2. 设置 Tooltip 内容
+        const tooltipContent = software.details || software.description;
+        tooltip.innerHTML = `
+            <div class="tooltip-header">
+                <div class="tooltip-icon"><img src="${software.icon}" alt="${software.name}" onerror="this.onerror=null; this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgd2lkdGg9IjI0IiBoZWlnaHQ9IjI0Ij48cGF0aCBkPSJNMTIgMkwyIDEySDVWMjBIMTlaTTcgMTguNUEyLjUgMi41IDAgMCAwIDkuNSAyMSAyLjUgMi41IDAgMCAwIDEyIDI0YTIuNSAyLjUgMCAwIDAgMi41LTIuNUExIDUgMCAwIDAgMTkgMjFIMTJaTTExIDExLjVMNyA3LjVIMTJWMTUuNUgxNFY2SDExWiIgZmlsbD0iIzY2NjY2NiIvPjwvc3ZnPg=='"></div>
+                <div class="tooltip-title">${software.name}</div>
+            </div>
+            <div class="tooltip-body">${tooltipContent}</div>
+        `;
+
+        // 3. 计算 Tooltip 位置 (相对于卡片居中，并位于卡片上方)
+        const rect = card.getBoundingClientRect();
+        const scrollX = window.scrollX || document.documentElement.scrollLeft;
+        const scrollY = window.scrollY || document.documentElement.scrollTop;
+        
+        // Tooltip 的左侧定位点 (卡片中心点的 X 坐标)
+        const tooltipX = rect.left + rect.width / 2 + scrollX;
+        // Tooltip 的顶部定位点 (卡片顶部的 Y 坐标)
+        const tooltipY = rect.top + scrollY;
+
+        // 应用定位 (CSS transform 负责将 Tooltip 向上和向左移动其自身宽度/高度的一半)
+        tooltip.style.position = 'absolute';
+        tooltip.style.left = `${tooltipX}px`;
+        tooltip.style.top = `${tooltipY}px`;
+
+        // 4. 显示 Tooltip
+        tooltip.classList.add('visible');
+    }
+
+    function hideTooltip() {
+        const tooltip = document.getElementById('global-software-tooltip');
+        if (tooltip) {
+            tooltip.classList.remove('visible');
+        }
+    }
+    // --- End Tooltip Manager Functions ---
+    
     // --- 1. 加载最新文章 (从 data/articles.json) ---
     async function loadLatestArticles() {
         // 相对路径：index.html 应该在 ./data/articles.json
@@ -16,7 +65,15 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             const data = await response.json();
             
-            // 假设文章索引已经按日期排序（最新在前），获取前 3 篇
+            // **修复：显式按日期降序排序 (最新在前)**
+            data.sort((a, b) => {
+                // 假设日期格式 YYYY-MM-DD 允许字符串比较
+                if (a.date < b.date) return 1;
+                if (a.date > b.date) return -1;
+                return 0;
+            });
+            
+            // 获取前 3 篇
             const latestArticles = data.slice(0, 3); 
 
             if (latestArticles.length === 0) {
@@ -59,7 +116,15 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
-        // 假设软件列表已经按某种顺序排序，获取前 3 个
+        // **修复：显式按日期降序排序 (最新在前)**
+        softwareList.sort((a, b) => {
+            // 假设日期格式 YYYY-MM-DD 允许字符串比较
+            if (a.date < b.date) return 1;
+            if (a.date > b.date) return -1;
+            return 0;
+        });
+
+        // 获取前 3 个
         const latestSoftware = softwareList.slice(0, 3);
         latestSoftwareContainer.innerHTML = ''; // 清空加载状态
 
@@ -72,8 +137,8 @@ document.addEventListener('DOMContentLoaded', function() {
             const card = document.createElement('div');
             card.className = 'software-card-home';
             
-            // 构造 Tooltip 内容
-            const tooltipContent = software.details || software.description;
+            // 使用 data 属性存储软件信息，用于全局 Tooltip
+            card.setAttribute('data-software-info', JSON.stringify(software));
 
             card.innerHTML = `
                 <div class="software-icon">
@@ -84,27 +149,17 @@ document.addEventListener('DOMContentLoaded', function() {
                     <p>${software.description}</p>
                     <a href="${software.website}" target="_blank" class="btn-sm"><i class="fas fa-download"></i> 下载</a>
                 </div>
-                <!-- NEW: 自定义 Tooltip 结构 -->
-                <div class="custom-tooltip">
-                    <div class="tooltip-header">
-                        <div class="tooltip-icon"><img src="${software.icon}" alt="${software.name}"></div>
-                        <div class="tooltip-title">${software.name}</div>
-                    </div>
-                    <div class="tooltip-body">${tooltipContent}</div>
-                </div>
             `;
             
             latestSoftwareContainer.appendChild(card);
             
-            // NEW: 添加悬浮事件监听器
-            const tooltip = card.querySelector('.custom-tooltip');
-            card.addEventListener('mouseenter', () => {
-                tooltip.classList.add('visible');
+            // 添加悬浮事件监听器 (使用全局 Tooltip 函数)
+            card.addEventListener('mouseenter', function() {
+                const softwareData = JSON.parse(this.getAttribute('data-software-info'));
+                createAndShowTooltip(this, softwareData);
             });
             
-            card.addEventListener('mouseleave', () => {
-                tooltip.classList.remove('visible');
-            });
+            card.addEventListener('mouseleave', hideTooltip);
         });
     }
 

@@ -586,6 +586,13 @@ main {
   margin-bottom: 10px;
 }
 
+/* NEW: 主软件页面（software.html）日期样式 */
+.software-card .software-info .software-date-full {
+    font-size: 0.85em;
+    color: var(--secondary-text); /* 使用次要文本色，低调显示 */
+    margin-bottom: 10px; /* 在日期和描述之间添加间距 */
+}
+
 .software-info p {
   color: var(--secondary-text);
   margin-bottom: 20px;
@@ -671,6 +678,7 @@ main {
 .software-links {
   display: flex;
   justify-content: space-between;
+  margin-top: auto; /* NEW: 将链接区域推到底部 */
 }
 
 .software-links a {
@@ -686,6 +694,13 @@ main {
 
 .software-links a:hover {
   background-color: var(--btn-hover);
+}
+
+/* NEW: 首页软件日期样式 (保留，因为它用于 home.js 渲染的卡片) */
+.software-card-home .software-info .software-date {
+    font-size: 0.85em;
+    color: var(--highlight);
+    margin-bottom: 8px;
 }
 
 .loading {
@@ -857,9 +872,9 @@ footer {
   border: 1px solid var(--border-color);
   border-radius: 6px;
   padding: 15px;
+  /* NEW: 启用 Flexbox 布局 */
   display: flex;
-  align-items: center;
-  transition: box-shadow 0.3s ease;
+  flex-direction: column;
   /* 确保卡片是相对定位的 */
   position: relative; 
 }
@@ -883,6 +898,10 @@ footer {
 .software-card-home .software-info {
   flex-grow: 1;
   padding: 0;
+  /* NEW: 允许其占据剩余空间，并启用 Flexbox 布局 */
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
 }
 
 .software-card-home .software-info h4 {
@@ -890,10 +909,19 @@ footer {
   margin-bottom: 5px;
 }
 
+.software-card-home .software-info .software-date {
+    font-size: 0.85em;
+    color: var(--highlight);
+    margin-bottom: 8px;
+}
+
 .software-card-home .software-info p {
   font-size: 0.9em;
   color: var(--secondary-text);
   margin-bottom: 10px;
+  /* 修复：确保描述占据空间并推动底部元素 */
+  flex-grow: 1;
+  
   /* 修复：使用 Webkit 属性实现多行省略号（限制 2 行） */
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -901,6 +929,10 @@ footer {
   overflow: hidden;
   text-overflow: ellipsis;
   /* height: auto; 和 overflow: visible; 已被替换 */
+}
+
+.software-card-home .software-info a.btn-sm {
+  margin-top: auto; /* NEW: 将下载按钮推到底部 */
 }
 
 .btn-sm {
