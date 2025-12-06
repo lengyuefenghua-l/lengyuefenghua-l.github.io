@@ -68,12 +68,15 @@ document.addEventListener('DOMContentLoaded', function() {
         // 使用 onerror 属性处理图片加载失败
         const iconHtml = `<img src="${iconSrc}" alt="${software.name} Icon" onerror="this.onerror=null; this.src='${fallbackIcon}'">`;
 
+        // NEW: 移除原有的 software-icon 块，将图标和标题放在 software-info 内部的 software-title-line 中
         card.innerHTML = `
-            <div class="software-icon">
-                ${iconHtml}
-            </div>
             <div class="software-info">
-                <h3>${software.name}</h3>
+                <div class="software-title-line">
+                    <div class="software-icon-small">
+                        ${iconHtml}
+                    </div>
+                    <h3>${software.name}</h3>
+                </div>
                 <!-- NEW: 添加收录日期信息 -->
                 <span class="software-date-full">收录于: ${software.date}</span>
                 <p>${software.description}</p>

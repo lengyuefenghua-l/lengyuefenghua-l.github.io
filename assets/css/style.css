@@ -398,11 +398,6 @@ main {
   padding: 50px 0;
 }
 
-.welcome-message h2 {
-  font-size: 2rem;
-  margin-bottom: 20px;
-}
-
 .article-content {
   background-color: var(--card-bg);
   padding: 30px;
@@ -565,6 +560,10 @@ main {
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); 
 }
 
+/* ------------------------------------------------------------------ */
+/* START: 软件收集页卡片标题行修改 (替换原有的 .software-icon 样式) */
+/* 移除原有的 .software-icon 样式 */
+/*
 .software-icon {
   text-align: center;
   padding: 20px 0;
@@ -576,8 +575,33 @@ main {
   height: 80px;
   object-fit: contain;
 }
+*/
+
+.software-title-line {
+    /* 标题行使用 Flexbox 布局 */
+    display: flex;
+    align-items: center; /* 垂直居中对齐图标和标题 */
+    padding: 10px 20px; /* 增加顶部和底部的内边距 */
+    background-color: var(--border-color); /* 保持顶部的背景色 */
+    margin-bottom: 0; /* 确保它紧贴 software-info body */
+}
+
+.software-icon-small {
+    /* 缩小图标尺寸，并添加右侧间距 */
+    width: 32px; 
+    height: 32px;
+    margin-right: 10px;
+    flex-shrink: 0;
+}
+
+.software-icon-small img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
 
 .software-info {
+  /* 移除原有的顶部 padding，改为只对内容部分 padding */
   padding: 20px;
   /* NEW: 允许其占据剩余空间，并启用 Flexbox 布局 */
   display: flex;
@@ -586,9 +610,19 @@ main {
 }
 
 .software-info h3 {
-  font-size: 1.3rem;
-  margin-bottom: 10px;
+    /* 覆盖原有 h3 样式，让它与图标对齐 */
+    font-size: 1.3rem;
+    margin-top: 0;
+    margin-bottom: 0;
+    line-height: 1.2;
+    /* 确保标题不会被强制换行 */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
+/* END: 软件收集页卡片标题行修改 */
+/* ------------------------------------------------------------------ */
+
 
 /* NEW: 主软件页面（software.html）日期样式 */
 .software-card .software-info .software-date-full {
@@ -876,7 +910,7 @@ footer {
   border: 1px solid var(--border-color);
   border-radius: 6px;
   padding: 15px;
-  /* NEW: 启用 Flexbox 布局 */
+  /* OLD: display: flex; flex-direction: column; 保持不变 */
   display: flex;
   flex-direction: column;
   /* 确保卡片是相对定位的 */
@@ -887,39 +921,69 @@ footer {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* 提升阴影效果 */
 }
 
+/* ------------------------------------------------------------------ */
+/* START: 首页卡片布局修改 (替换原有的 .software-card-home .software-icon 和 .software-card-home .software-info 样式) */
+
+/* NEW: 首页卡片标题行容器 */
+.software-title-line-home {
+    display: flex;
+    align-items: center; /* 垂直居中对齐 */
+    margin-bottom: 10px; /* 标题和描述之间的间距 */
+}
+
+.software-icon-home {
+    /* 保持原有 48x48 尺寸，并作为容器 */
+    width: 48px;
+    height: 48px;
+    margin-right: 10px;
+    flex-shrink: 0;
+}
+
+.software-icon-home img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.software-info-body {
+    /* 描述和下载按钮的容器 */
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; /* 占据剩余空间 */
+}
+
+
+/* 覆盖原有的 .software-card-home .software-icon 样式 (已用 .software-icon-home 替代) */
+/*
 .software-card-home .software-icon {
   padding: 0;
   margin-right: 15px;
   background: none;
-  /* 确保暗色主题下图标背景不突兀 */
 }
-
 .software-card-home .software-icon img {
   width: 48px;
   height: 48px;
 }
-
 .software-card-home .software-info {
   flex-grow: 1;
   padding: 0;
-  /* NEW: 允许其占据剩余空间，并启用 Flexbox 布局 */
   display: flex;
   flex-direction: column;
   flex-grow: 1;
 }
+.software-card-home .software-info h4 { ... }
+.software-card-home .software-info p { ... }
+*/
 
-.software-card-home .software-info h4 {
+.software-title-line-home h4 {
+  /* 覆盖原有 h4 样式，确保与图标垂直居中 */
   font-size: 1.2rem;
-  margin-bottom: 5px;
+  margin-top: 0;
+  margin-bottom: 0;
+  line-height: 1.2;
 }
 
-.software-card-home .software-info .software-date {
-    font-size: 0.85em;
-    color: var(--highlight);
-    margin-bottom: 8px;
-}
-
-.software-card-home .software-info p {
+.software-info-body p {
   font-size: 0.9em;
   color: var(--secondary-text);
   margin-bottom: 10px;
@@ -932,10 +996,11 @@ footer {
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
-  /* height: auto; 和 overflow: visible; 已被替换 */
 }
+/* END: 首页卡片布局修改 */
+/* ------------------------------------------------------------------ */
 
-.software-card-home .software-info a.btn-sm {
+.software-card-home .software-info-body a.btn-sm {
   margin-top: auto; /* NEW: 将下载按钮推到底部 */
 }
 
@@ -1032,6 +1097,3 @@ footer {
 .back-to-top:hover {
     background-color: var(--btn-hover);
 }
-
-
-/* ... (保留后续样式) ... */
