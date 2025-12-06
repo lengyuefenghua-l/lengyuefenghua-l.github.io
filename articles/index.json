@@ -1,17 +1,6 @@
 [
-  {
-    "title": "欢迎来到我的博客！",
-    "file": "post-01.md",
-    "date": "2025-12-01"
-  },
-  {
-    "title": "高效工作：我常用的VS Code扩展",
-    "file": "post-02.md",
+   {
+    "file": "基于AutoHotkey的Steam账号切换器.md",
     "date": "2025-11-15"
-  },
-  {
-    "title": "从零开始学习前端的路线图",
-    "file": "post-03.md",
-    "date": "2025-10-28"
   }
 ]

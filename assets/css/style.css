@@ -46,8 +46,9 @@ body {
 }
 
 .container {
-  max-width: 1200px;
-  margin: 0 auto;
+  max-width: 1600px;
+  /* 恢复居中，让 Header 和 Nav 居中对齐 */
+  margin: 0 auto; 
   padding: 0 20px;
 }
 
@@ -212,11 +213,24 @@ main {
 /* 博客页面样式 */
 .blog-layout {
   display: flex;
+  /* 确保整个布局容器铺满 */
+  width: 100%; 
+  
+  /* 解决博客主体居中问题：让布局靠左对齐 */
+  margin-left: 0;
+  margin-right: auto;
+  max-width: 100%;
 }
 
 .blog-sidebar {
-  width: 300px;
-  margin-right: 40px;
+  /* 调整为 22.5% 宽度 (15% * 1.5) */
+  width: 22.5%; 
+  /* 移除 margin-right */
+  margin-right: 0;
+  /* 确保宽度不变，不被挤压 */
+  flex-shrink: 0; 
+  /* 添加右侧内边距作为分隔 */
+  padding-right: 20px;
 }
 
 .search-box {
@@ -310,7 +324,11 @@ main {
 }
 
 .blog-content {
-  flex: 1;
+  /* 占据剩余 77.5% 宽度 (100% - 22.5%) */
+  width: 77.5%;
+  flex: 1 1 77.5%; /* 确保它能占据剩余空间 */
+  /* 移除左侧内边距，因为间距已添加到侧边栏的 padding-right 上 */
+  padding-left: 0; 
 }
 
 .welcome-message {
@@ -548,6 +566,7 @@ footer {
     width: 100%;
     margin-right: 0;
     margin-bottom: 30px;
+    padding-right: 0; /* 移动端不需要分隔 */
   }
   
   .software-grid {
