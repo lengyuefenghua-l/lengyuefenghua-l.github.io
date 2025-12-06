@@ -15,6 +15,8 @@
   --code-bg: #f6f8fa;
   --error-bg: #ffe0e0; /* 浅色主题下的错误背景 */
   --error-text: #cc0000; /* 浅色主题下的错误文本 */
+  --tooltip-shadow: 0 6px 20px rgba(0, 0, 0, 0.15); /* 新增 Tooltip 阴影 */
+  --tooltip-border: #cccccc; /* Tooltip 边框颜色（浅白色） */
 }
 
 /* 暗色主题变量 */
@@ -33,6 +35,8 @@
   --code-bg: #2d2d2d;
   --error-bg: #400000; /* 暗色主题下的错误背景 */
   --error-text: #ff9999; /* 暗色主题下的错误文本 */
+  --tooltip-shadow: 0 6px 20px rgba(0, 0, 0, 0.5); /* Tooltip 阴影 */
+  --tooltip-border: #666666; /* 暗色 Tooltip 边框 */
 }
 
 * {
@@ -281,6 +285,12 @@ main {
   display: flex;
   align-items: center; 
   overflow: hidden; 
+  
+  /* NEW: 应用整体背景和圆角 */
+  background-color: transparent; /* 默认透明 */
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+  padding: 0 10px; /* 内部填充 */
 }
 
 .article-list a {
@@ -289,9 +299,9 @@ main {
   /* 修复：使用 Flexbox 属性 */
   flex-grow: 1; 
   display: block; 
-  padding: 8px 10px;
-  border-radius: 4px;
-  transition: background-color 0.3s ease;
+  padding: 8px 0;
+  border-radius: 0; /* 移除圆角 */
+  transition: color 0.3s ease; /* 仅过渡颜色 */
   /* 移除浮动和宽度计算 */
   float: none;
   width: auto; 
@@ -299,12 +309,27 @@ main {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  /* 确保链接背景透明，透出 LI 的背景 */
+  background-color: transparent !important; 
 }
 
-.article-list a:hover,
-.article-list a.active {
+/* 修复：博客列表悬停和选中时，链接的背景同步高亮 (文字颜色保持不变) */
+.article-list li:hover {
   background-color: var(--border-color);
 }
+
+/* 确保 active 状态下 LI 的背景高亮 (通过 JS 控制 A 的 active class) */
+.article-list a.active {
+  background-color: transparent;
+}
+
+/* 博客列表悬停和选中时，日期标签的背景同步高亮 */
+.article-list li:hover .article-date,
+.article-list a.active + .article-date {
+  background-color: var(--highlight);
+  color: white; /* 确保文字是白色 */
+}
+/* ---------------------------------------------------- */
 
 /* 修复：文章日期标签样式 */
 .blog-sidebar .article-list .article-date {
@@ -318,6 +343,7 @@ main {
   margin-left: 10px; /* 添加左侧间距 */
   flex-shrink: 0;
   line-height: 1; /* 确保高度紧凑 */
+  transition: background-color 0.3s ease, color 0.3s ease; /* 添加过渡效果 */
 }
 
 
@@ -509,6 +535,8 @@ main {
 }
 
 .software-grid {
+  /* 确保卡片是相对定位的，以便绝对定位的 Tooltip 可以正确放置 */
+  position: relative; 
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 30px;
@@ -520,11 +548,17 @@ main {
   box-shadow: var(--shadow);
   overflow: hidden;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  /* NEW: 启用 Flexbox 布局 */
+  display: flex; 
+  flex-direction: column;
+  /* 确保卡片是相对定位的 */
+  position: relative; 
 }
 
 .software-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  /* 悬停时稍微抬高阴影 */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); 
 }
 
 .software-icon {
@@ -541,6 +575,10 @@ main {
 
 .software-info {
   padding: 20px;
+  /* NEW: 允许其占据剩余空间，并启用 Flexbox 布局 */
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
 }
 
 .software-info h3 {
@@ -552,17 +590,83 @@ main {
   color: var(--secondary-text);
   margin-bottom: 20px;
   font-size: 0.95rem;
-  /* 修复：限制最大高度并启用滚动条 */
-  line-height: 1.5; /* 确保行高一致，用于计算高度 */
-  max-height: 4.5em; /* 限制为 3 行高 (1.5 * 3 = 4.5em) */
-  overflow-y: auto; /* 超出 3 行时显示垂直滚动条 */
-  /* 移除 Webkit 截断属性 */
-  /* display: -webkit-box;
+  /* 修复：确保描述占据空间并推动底部元素 */
+  flex-grow: 1; 
+  /* 确保描述顶部与标题对齐，底部与链接区域有间隔 */
+  margin-bottom: 15px; 
+  
+  line-height: 1.5; 
+  display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  text-overflow: ellipsis; */
+  text-overflow: ellipsis;
 }
+
+/* NEW: 自定义悬浮提示框样式 (应用于首页和软件收集页) */
+.custom-tooltip {
+    position: absolute;
+    top: -20px; /* 向上偏移 */
+    left: 50%;
+    transform: translateX(-50%) translateY(-100%); /* 居中并位于卡片上方 */
+    z-index: 100;
+    
+    /* 样式美化，参考图片 */
+    background-color: var(--card-bg);
+    border: 1px solid var(--tooltip-border); /* 浅白色边框 */
+    box-shadow: var(--tooltip-shadow); /* 阴影 */
+    border-radius: 8px;
+    padding: 15px;
+    width: 300px; /* 固定宽度 */
+    max-height: 250px;
+    overflow-y: hidden; 
+    
+    font-size: 0.9rem;
+    line-height: 1.4;
+    color: var(--text-color);
+    text-align: left;
+    
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none; /* 允许点击穿透 */
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.custom-tooltip.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(-110%); /* 悬浮时略微向下移动 */
+}
+
+/* Tooltip 内部结构 */
+.tooltip-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 8px;
+}
+.tooltip-icon img {
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+    border-radius: 4px;
+}
+.tooltip-title {
+    font-weight: bold;
+    color: var(--text-color); /* 标题使用主文本色 */
+    font-size: 1.1em;
+}
+.tooltip-body {
+    color: var(--secondary-text);
+    font-size: 0.9em;
+}
+
+/* 移除浏览器默认的悬浮效果 */
+.software-card[title]:hover::after {
+    display: none;
+}
+/* ------------------------------------------------ */
 
 .software-links {
   display: flex;
@@ -685,29 +789,49 @@ footer {
 .article-list-home li {
     display: flex;
     align-items: center; /* 垂直居中文本和日期标签 */
+    
+    /* NEW: 应用整体背景和圆角 */
+    background-color: transparent; /* 默认透明 */
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+    padding: 0 10px; /* 内部填充 */
 }
 
 .article-list-home li a {
   /* 链接占据剩余空间 */
   flex-grow: 1; 
   display: block; /* 保持块级特性以应用 padding 和 border-bottom */
-  padding: 10px 15px; /* 增加点击区域 */
+  padding: 10px 0; /* 仅垂直填充 */
   border-bottom: 1px dashed var(--border-color);
   color: var(--text-color);
   text-decoration: none;
-  transition: color 0.3s ease, background-color 0.3s ease;
-  border-radius: 4px;
+  transition: color 0.3s ease;
+  border-radius: 0;
+  /* 确保链接背景透明 */
+  background-color: transparent !important;
 }
 
 .article-list-home li:last-child a {
   border-bottom: none;
 }
 
-.article-list-home li a:hover {
-  color: var(--highlight);
-  background-color: var(--nav-bg); /* 添加 hover 背景 */
+/* 修复：首页文章列表悬停时，整个 LI 的背景同步高亮 */
+.article-list-home li:hover {
+  background-color: var(--nav-bg); 
+}
+
+/* 修复：首页文章列表悬停时，链接的背景同步高亮 (文字颜色保持不变) */
+.article-list-home li:hover a {
+  color: var(--text-color); /* 保持文字颜色不变 */
   text-decoration: none;
 }
+
+/* 修复：首页文章列表悬停时，日期标签的背景同步高亮 */
+.article-list-home li:hover .article-date {
+  background-color: var(--highlight); /* 日期标签背景高亮 */
+  color: white;
+}
+/* ---------------------------------------------------- */
 
 .article-list-home .article-date {
   /* 更新为标签样式，并移除浮动相关属性 */
@@ -719,6 +843,7 @@ footer {
   margin-right: 15px; 
   flex-shrink: 0; /* 防止标签被压缩 */
   line-height: 1; /* 紧凑行高 */
+  transition: background-color 0.3s ease, color 0.3s ease; /* 添加过渡效果 */
 }
 
 .software-grid-home {
@@ -735,6 +860,8 @@ footer {
   display: flex;
   align-items: center;
   transition: box-shadow 0.3s ease;
+  /* 确保卡片是相对定位的 */
+  position: relative; 
 }
 
 .software-card-home:hover {

@@ -1,26 +1,65 @@
 [
     {
         "id": 1,
-        "name": "虚拟串口工具",
-        "description": "我们的免费虚拟串口工具包允许您创建虚拟COM端口，并使用基于软件的虚拟无调制解调器线缆成对连接。它还允许使用命名管道技术将创建的端口连接到串行应用程序或虚拟串行设备。每个虚拟COM端口精确模拟物理串口的参数和行为。因此，你的通信应用与这些端口的交互方式与硬件端口完全相同。这款免费的虚拟串口模拟器支持Windows 10 64位和32位，以及从Windows Vista开始的所有现代Windows桌面和服务器平台（包括Windows 11）。",
+        "name": "虚拟串口-FVSP",
+        "description": "Free Virtual Serial Ports 是一款用于 Windows 平台的软件 COM 端口仿真工具。",
+        "details":"我们的免费虚拟串口工具包允许您创建虚拟COM端口，并使用基于软件的虚拟无调制解调器线缆成对连接。它还允许使用命名管道技术将创建的端口连接到串行应用程序或虚拟串行设备。每个虚拟COM端口精确模拟物理串口的参数和行为。因此，你的通信应用与这些端口的交互方式与硬件端口完全相同。这款免费的虚拟串口模拟器支持Windows 10 64位和32位，以及从Windows Vista开始的所有现代Windows桌面和服务器平台（包括Windows 11）。",
         "icon": "https://freevirtualserialports.com/images/icons/icon-32x32-free-virtual-serial-ports.svg",
         "category": "development",
         "website": "https://freevirtualserialports.com/"
     },
     {
         "id": 2,
-        "name": "开发工具2",
-        "description": "代码托管平台。",
-        "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgd2lkdGg9IjI0IiBoZWlnaHQ9IjI0Ij48cGF0aCBkPSJNMTIgMkM2LjQ4IDIgMiA2LjQ4IDIgMTJzNC40OCAxMCAxMCAxMCAxMC00LjQ4IDEwLTEwLTQuNDgtMTAtMTAtMTB6bTEwIDhMMTIgMTJMNCAxMGg4djJ6bTAgMGg4di0yaC04di00aDJ2Mmg2eiIgZmlsbD0iIzMzMzMzMyIvPjwvc3ZnPg==",
+        "name": "虚拟串口-VSPD",
+        "description": "Virtual Serial Port Driver 是一款虚拟 COM 端口驱动程序是一项强大的技术，专为那些开发、测试或调试串口软件和硬件的人员设计。",
+        "details":"允许创建大量虚拟 COM 端口，并为您提供完全模拟串口行为的强大可能性。虚拟串口软件不仅仅是一个简单的 COM 端口模拟器。它提供灵活的端口创建、分割、共享和合并真实串口的功能，允许测试串口软件，支持控制线，并支持虚拟和物理 COM 端口之间的高速数据传输。各种应用程序可以通过使用连接在虚拟空端口电缆上的虚拟串口交换数据。从一个端口发送到另一个端口的串口数据将立即被接收。",
+        "icon": "https://www.virtual-serial-port.org/images/upload/index/vspd-icon-1@2x.png",
         "category": "development",
-        "website": "#"
+        "website": "https://www.virtual-serial-port.org/"
     },
     {
         "id": 3,
-        "name": "浏览器",
-        "description": "流行网页浏览器。",
-        "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgd2lkdGg9IjI0IiBoZWlnaHQ9IjI0Ij48cGF0aCBkPSJNMTIgMkM2LjQ4IDIgMiA2LjQ4IDIgMTJzNC40OCAxMCAxMCAxMCAxMC00LjQ4IDEwLTEwLTQuNDgtMTAtMTAtMTB6bTEwIDhMMTIgMTJMNCAxMGg4djJ6bTAgMGg4di0yaC04di00aDJ2Mmg2eiIgZmlsbD0iI0ZGRiIvPjxwYXRoIGQ9Ik0xMiA0QzcuNTggNCA0IDcuNTggNCAxMnM0LjU4IDEwIDEwIDEwIDEwLTQuNTggMTAtMTAtNC41OC0xMC0xMC0xMHoiIGZpbGw9IiMzMzMzMzMiLz48cGF0aCBkPSJNMTIgNnM0Ljk3IDAgOSA0LjAzIDkgOXMtNCA0LjAzLTkgOS05LTQtOS05eiIgZmlsbD0iI0ZGRiIvPjxwYXRoIGQ9Ik0xMiA2czQuOTcgMCA5IDQuMDMgOSA5cy00IDQuMDMtOSA5LTktNC05LTktNC4wMy05LTktOXoiIGZpbGw9IiMzMzMzMzMiLz48cGF0aCBkPSJNMTIgNnM0Ljk3IDAgOSA0LjAzIDkgOXMtNCA0LjAzLTkgOS05LTQtOS05LS4wMy05LTktOXoiIGZpbGw9IiNGRkYiLz48cGF0aCBkPSJNMTIgNnM0Ljk3IDAgOSA0LjAzIDkgOXMtNCA0LjAzLTkgOS05LTQtOS05LTQuMDMtOS05LTl6IiBmaWxsPSIjMzMzMzMzIi8+PHBhdGggZD0iTTEyIDZzNC45NyAwOSA0LjAzIDkgOXMtNCA0LjAzLTkgOS05LTQtOS05LTQuMDMtOS05LTl6IiBmaWxsPSIjRkZGIi8+PHBhdGggZD0iTTEyIDZzNC45NyAwOSA0LjAzIDkgOXMtNCA0LjAzLTkgOS05LTQtOS05LTQuMDMtOS05LTl6IiBmaWxsPSIjMzMzMzMzIiIvPjwvc3ZnPg==",
-        "category": "browser",
-        "website": "#"
+        "name": "虚拟串口-com0com",
+        "description": "Null-modem 模拟器是一个开源的 Windows 内核模式虚拟串口驱动程序，可在 GPL 许可证下免费使用。",
+        "details":"Null-modem 模拟器可用于为设备模拟器提供串行接口。在这种情况下，设备模拟程序使用一对中的一端，另一端可以由需要 COM 端口与设备通信的 Windows 或 DOS 应用程序使用。例如，要通过 IP 发送/接收传真，您可以通过虚拟 COM 端口对将 Windows 传真应用程序连接到 t38modem（T38FAX 伪调制解调器，t38modem 项目的一部分）。",
+        "icon": "https://com0com.sourceforge.net/favicon.ico",
+        "category": "development",
+        "website": "https://com0com.sourceforge.net"
+    },
+    {
+        "id": 4,
+        "name": "串口调试-O-Comtool",
+        "description": "O-Comtool是一款简单易用的串口调试助手，本软件提供了丰富的功能，有效提高嵌入式开发调试的效率。",
+        "details":"O-Comtool是一款简单易用的串口调试助手，本软件提供了丰富的功能，有效提高嵌入式开发调试的效率。",
+        "icon": "http://www.ifreehub.com/image_bed/upload//l_IUV8bODji6Ykb_GV5opSNeGlloQLde8MvxEiBNT0A.png",
+        "category": "development",
+        "website": "https://github.com/vesamount/O-ComTool"
+    },
+    {
+        "id": 2,
+        "name": "虚拟串口-VSPD",
+        "description": "Virtual Serial Port Driver 是一款虚拟 COM 端口驱动程序是一项强大的技术，专为那些开发、测试或调试串口软件和硬件的人员设计。",
+        "details":"允许创建大量虚拟 COM 端口，并为您提供完全模拟串口行为的强大可能性。虚拟串口软件不仅仅是一个简单的 COM 端口模拟器。它提供灵活的端口创建、分割、共享和合并真实串口的功能，允许测试串口软件，支持控制线，并支持虚拟和物理 COM 端口之间的高速数据传输。各种应用程序可以通过使用连接在虚拟空端口电缆上的虚拟串口交换数据。从一个端口发送到另一个端口的串口数据将立即被接收。",
+        "icon": "https://www.virtual-serial-port.org/images/upload/index/vspd-icon-1@2x.png",
+        "category": "development",
+        "website": "https://www.virtual-serial-port.org/"
+    },
+    {
+        "id": 3,
+        "name": "虚拟串口-com0com",
+        "description": "Null-modem 模拟器是一个开源的 Windows 内核模式虚拟串口驱动程序，可在 GPL 许可证下免费使用。",
+        "details":"Null-modem 模拟器可用于为设备模拟器提供串行接口。在这种情况下，设备模拟程序使用一对中的一端，另一端可以由需要 COM 端口与设备通信的 Windows 或 DOS 应用程序使用。例如，要通过 IP 发送/接收传真，您可以通过虚拟 COM 端口对将 Windows 传真应用程序连接到 t38modem（T38FAX 伪调制解调器，t38modem 项目的一部分）。",
+        "icon": "https://com0com.sourceforge.net/favicon.ico",
+        "category": "development",
+        "website": "https://com0com.sourceforge.net"
+    },
+    {
+        "id": 4,
+        "name": "串口调试-O-Comtool",
+        "description": "O-Comtool是一款简单易用的串口调试助手，本软件提供了丰富的功能，有效提高嵌入式开发调试的效率。",
+        "details":"O-Comtool是一款简单易用的串口调试助手，本软件提供了丰富的功能，有效提高嵌入式开发调试的效率。",
+        "icon": "http://www.ifreehub.com/image_bed/upload//l_IUV8bODji6Ykb_GV5opSNeGlloQLde8MvxEiBNT0A.png",
+        "category": "development",
+        "website": "https://github.com/vesamount/O-ComTool"
     }
 ]
