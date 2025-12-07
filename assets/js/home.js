@@ -122,8 +122,24 @@ document.addEventListener('DOMContentLoaded', function() {
                 // NEW: 显示最新的日期 (updated_date)
                 const displayDate = article.updated_date || article.date;
                 
-                // 链接到博客页面 (pages/blog.html)，并添加 title 属性用于悬浮提示
-                li.innerHTML = `<a href="./pages/blog.html" data-article-file="${article.file}" title="${title}">${title}</a><span class="article-date">${displayDate}</span>`;
+                // NEW: 渲染标签 HTML 结构 (首页限制显示前2个标签)
+                const tagsHtml = (article.tags && article.tags.length > 0)
+                    ? `<div class="article-tags">${article.tags.slice(0, 2).map(tag => `<span class="article-tag">${tag}</span>`).join('')}</div>`
+                    : '';
+                
+                // FIX: 链接到博客页面 (pages/blog.html)，并传递文章ID作为查询参数 'id'
+                // 使用 encodeURIComponent 确保中文文件名可以正确传递
+                const encodedId = encodeURIComponent(article.file);
+                const articleLink = `./pages/blog.html?id=${encodedId}`;
+
+                // NEW: 在链接内部使用 flex 布局，将标题和标签放在一起
+                li.innerHTML = `
+                    <a href="${articleLink}" data-article-file="${article.file}" title="${title}">
+                        <span class="article-title-text">${title}</span>
+                        ${tagsHtml}
+                    </a>
+                    <span class="article-date">${displayDate}</span>
+                `;
                 latestArticlesContainer.appendChild(li);
             });
 

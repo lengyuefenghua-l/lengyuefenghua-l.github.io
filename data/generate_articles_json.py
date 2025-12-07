@@ -47,6 +47,7 @@ def generate_articles_json():
     
     # 1. 加载现有数据
     existing_data = load_articles_json(JSON_FILE_PATH)
+    # 使用 article_id (即文件名) 作为键来映射现有文章数据
     articles_map = {item['file']: item for item in existing_data}
     updated_articles = []
     
@@ -77,8 +78,8 @@ def generate_articles_json():
             article_entry = articles_map.get(article_id)
             
             if article_entry:
-                # 现有文章：保持 date 不变
-                new_entry = article_entry
+                # 现有文章：
+                new_entry = article_entry.copy() # 复制现有条目以保留所有字段 (包括 tags)
                 
                 # 确定已记录的 updated_date，如果缺失则使用 date 作为基准
                 recorded_updated_date = new_entry.get('updated_date', new_entry.get('date', '1900-01-01'))
@@ -87,12 +88,18 @@ def generate_articles_json():
                 if file_mtime_str > recorded_updated_date:
                     new_entry['updated_date'] = file_mtime_str
                     print(f"更新: 文章 '{article_id}' 的 updated_date 已更新为 {file_mtime_str}")
+                    
+                # 确保 date 字段存在，如果不存在则使用文件创建时间
+                if 'date' not in new_entry:
+                     new_entry['date'] = file_mtime_str
+                     
             else:
-                # 新文章：date 和 updated_date 都设置为文件修改日期
+                # 新文章：date, updated_date, 和 tags 都设置为默认值
                 new_entry = {
                     'file': article_id,
                     'date': file_mtime_str,      
-                    'updated_date': file_mtime_str 
+                    'updated_date': file_mtime_str,
+                    'tags': [] # NEW: 为新文章添加空的 tags 列表
                 }
                 print(f"新增: 文章 '{article_id}' 已添加，date/updated_date 设置为 {file_mtime_str}")
 

@@ -19,26 +19,6 @@
   --tooltip-border: #cccccc; /* Tooltip 边框颜色（浅白色） */
 }
 
-/* 暗色主题变量 */
-.dark-theme {
-  --bg-color: #1e1e1e;
-  --text-color: #e0e0e0;
-  --secondary-text: #b0b0b0;
-  --border-color: #444444;
-  --header-bg: #2d2d2d;
-  --nav-bg: #333333;
-  --card-bg: #2d2d2d;
-  --btn-bg: #4dabf7;
-  --btn-hover: #339af0;
-  --shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-  --highlight: #4dabf7;
-  --code-bg: #3c3c40; /* 调整: 暗色主题下增加代码块对比度 */
-  --error-bg: #400000; /* 暗色主题下的错误背景 */
-  --error-text: #ff9999; /* 暗色主题下的错误文本 */
-  --tooltip-shadow: 0 6px 20px rgba(0, 0, 0, 0.5); /* Tooltip 阴影 */
-  --tooltip-border: #666666; /* 暗色 Tooltip 边框 */
-}
-
 * {
   margin: 0;
   padding: 0;
@@ -92,21 +72,6 @@ header h1 a {
   text-decoration: none;
 }
 
-.theme-toggle {
-  background: none;
-  border: none;
-  color: var(--text-color);
-  font-size: 1.5rem;
-  cursor: pointer;
-  padding: 5px;
-  border-radius: 50%;
-  transition: background-color 0.3s ease;
-}
-
-.theme-toggle:hover {
-  background-color: var(--border-color);
-}
-
 /* 导航样式 */
 nav {
   background-color: var(--nav-bg);
@@ -137,11 +102,12 @@ nav ul li a i {
   margin-right: 5px;
 }
 
+/* 移除导航链接的悬停和激活状态的下划线 */
 nav ul li a:hover,
 nav ul li a.active {
   background-color: var(--border-color);
+  text-decoration: none; /* FIX: 移除下划线 */
 }
-
 /* 主要内容样式 */
 main {
   padding: 40px 0;
@@ -243,8 +209,65 @@ main {
   padding-right: 20px;
   position: sticky;
   top: 80px;
-  height: calc(100vh - 120px);
-  overflow-y: auto;
+  /* 恢复为传统的固定侧边栏样式，只允许内部内容滚动 */
+  height: calc(100vh - 120px); 
+  display: block; /* 取消 Flex */
+  overflow-y: hidden; /* 仅在内容 wrapper 上启用滚动 */
+}
+
+/* NEW: 侧边栏内容包裹器，现在是唯一可滚动部分 */
+.sidebar-content-wrapper {
+    /* 占据父容器的高度并启用滚动 */
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto; /* 允许滚动 */
+    padding-right: 5px; /* 避免滚动条遮挡内容 */
+}
+
+/* NEW: 侧边栏顶部搜索/筛选区 */
+.sidebar-top-section {
+    flex-shrink: 0; 
+}
+
+/* NEW: 文章列表区 */
+.article-list-section {
+    flex-shrink: 0;
+}
+
+/* REMOVED: toc-wrapper 样式 (因为它不再存在于左侧栏) */
+/* REMOVED: 居中相关的 flex 样式，因为左侧栏不需要居中了 */
+
+
+/* NEW: 右侧固定 TOC 样式 */
+.toc-fixed-wrapper {
+    position: fixed;
+    top: 50%; /* 垂直居中 */
+    right: 20px; /* 距离右侧 20px */
+    transform: translateY(-50%) translateX(100%); /* 默认隐藏到右侧 */
+    width: 250px; /* 固定宽度 */
+    max-height: 80vh; /* 限制高度 */
+    overflow-y: auto;
+    z-index: 10;
+    
+    /* 默认隐藏样式 */
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none; /* 默认不可点击 */
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
+    
+    /* 样式美化 */
+    background-color: var(--card-bg);
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    padding: 15px;
+}
+
+.toc-fixed-wrapper.visible {
+    transform: translateY(-50%) translateX(0%); /* 滚动时显示 */
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto; /* 滚动时可点击 */
 }
 
 .search-box {
@@ -271,8 +294,55 @@ main {
   width: 100%;
 }
 
+/* NEW: 标签筛选区域样式 */
+.tag-filter-section {
+    margin-bottom: 30px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.tag-filter-section h3 {
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+}
+
+.tag-buttons-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.tag-btn {
+    background-color: var(--nav-bg);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    padding: 5px 10px;
+    border-radius: 15px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+}
+
+.tag-btn:hover {
+    background-color: var(--border-color);
+}
+
+.tag-btn.active {
+    background-color: var(--highlight);
+    color: white;
+    border-color: var(--highlight);
+    font-weight: bold;
+}
+/* END: 标签筛选区域样式 */
+
+
 .article-list {
-  margin-bottom: 30px;
+  /* 移除 margin-bottom */
+  margin-bottom: 0px;
 }
 
 .article-list h3 {
@@ -307,20 +377,69 @@ main {
   text-decoration: none;
   /* 修复：使用 Flexbox 属性 */
   flex-grow: 1; 
+  /* 移除链接内部的 flex 布局，使其恢复为标准块级元素，只包含标题文本 */
   display: block; 
+  align-items: initial; 
   padding: 8px 0;
   border-radius: 0; /* 移除圆角 */
   transition: color 0.3s ease; /* 仅过渡颜色 */
   /* 移除浮动和宽度计算 */
   float: none;
   width: auto; 
-  /* 新增：单行显示，超出显示省略号 */
+  /* NEW: 确保链接内的标题文本单行显示，超出显示省略号 */
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   /* 确保链接背景透明，透出 LI 的背景 */
   background-color: transparent !important; 
 }
+
+/* FIX: 首页文章列表链接样式，使其能够容纳标签 */
+.article-list-home li a {
+    flex-grow: 1; 
+    display: flex; /* 启用 Flexbox */
+    align-items: center; /* 垂直居中对齐 */
+    padding: 10px 0; 
+    border-bottom: 1px dashed var(--border-color);
+    color: var(--text-color);
+    text-decoration: none;
+    white-space: normal; /* 允许标签和标题在必要时换行或被截断 */
+    overflow: visible;
+    text-overflow: clip; 
+    background-color: transparent !important;
+}
+
+/* NEW: 首页/博客列表中的标题文本（用于控制单行溢出和标签间距） */
+.article-list-home .article-title-text,
+.article-list a .article-title-text { /* 针对博客列表，尽管目前博客列表已无标签，但保留此样式以备用 */
+    flex-shrink: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-right: 10px; /* 标题和标签的间距 */
+}
+
+/* NEW: 首页/博客列表中的标签集合 */
+.article-list-home .article-tags,
+.article-list .article-tags {
+    display: flex;
+    gap: 5px;
+    flex-shrink: 0; /* 防止标签被压缩 */
+    max-width: 50%; /* 限制标签容器宽度，确保标题有空间 */
+}
+
+/* NEW: 首页/博客列表中的单个标签 */
+.article-list-home .article-tag,
+.article-list .article-tag {
+    font-size: 0.7rem;
+    color: var(--highlight);
+    border: 1px solid var(--highlight);
+    padding: 2px 5px;
+    border-radius: 10px;
+    line-height: 1;
+    white-space: nowrap;
+}
+
 
 /* 修复：博客列表悬停和选中时，链接的背景同步高亮 (文字颜色保持不变) */
 .article-list li:hover {
@@ -357,7 +476,8 @@ main {
 
 
 .toc-container {
-  margin-bottom: 30px;
+  /* 目录容器 (在 TOC Wrapper 内部) */
+  margin-bottom: 0px; 
 }
 
 .toc-container h3 {
@@ -368,7 +488,8 @@ main {
 
 .toc {
   list-style: none;
-  padding-left: 20px;
+  /* 移除左侧缩进，改为在链接上控制 */
+  padding-left: 0; 
 }
 
 .toc li {
@@ -379,21 +500,51 @@ main {
   color: var(--text-color);
   text-decoration: none;
   transition: color 0.3s ease;
+  /* NEW: 默认左侧填充，为 active 状态的边框留出空间 */
+  padding-left: 20px; 
+  display: block; /* 确保 padding 和 border 占据整个 li 宽度 */
+  border-left: 3px solid transparent; /* 默认透明边框 */
 }
 
 .toc a:hover {
   color: var(--highlight);
 }
 
-.toc .toc-h3 {
-  padding-left: 20px;
-  font-size: 0.9em;
+/* NEW: 滚动监听激活时的样式 */
+.toc a.active-toc-link {
+    color: var(--highlight);
+    font-weight: bold;
+    border-left: 3px solid var(--highlight); /* 左侧高亮边框 */
+    /* 修复：将原有填充减少 3px，确保文本在视觉上是齐平的 */
+    padding-left: 17px; 
+    text-decoration: none; /* 激活时移除下划线 */
 }
 
+/* 修复：二级和三级目录的缩进 */
+.toc .toc-h2 a {
+    /* 默认 20px 填充 + 20px 缩进 = 40px */
+    padding-left: 40px; 
+}
+.toc .toc-h3 a {
+    /* 默认 20px 填充 + 40px 缩进 = 60px */
+    padding-left: 60px;
+    font-size: 0.9em;
+}
+
+/* 确保 active 状态下的缩进保持相对位置 */
+.toc .toc-h2 a.active-toc-link {
+    padding-left: 37px; /* 40px - 3px border = 37px */
+}
+
+.toc .toc-h3 a.active-toc-link {
+    padding-left: 57px; /* 60px - 3px border = 57px */
+}
+
+
 .blog-content {
-  /* 占据剩余 77.5% 宽度 (100% - 22.5%) */
+  /* 占据剩余空间 */
   width: 77.5%;
-  flex: 1 1 77.5%; /* 确保它能占据剩余空间 */
+  flex: 1 1 77.5%; 
   /* 移除左侧内边距，因为间距已添加到侧边栏的 padding-right 上 */
   padding-left: 0; 
 }
@@ -416,7 +567,9 @@ main {
 .article-content h4,
 .article-content h5,
 .article-content h6 {
-  margin-top: 30px;
+  /* NEW: 添加一个 padding-top 用于滚动定位时的修正，以避免被固定导航栏遮挡 (虽然这里没有固定导航栏，但保持良好实践) */
+  padding-top: 30px; 
+  margin-top: 0px; /* 覆盖原来的 30px */
   margin-bottom: 20px;
   color: var(--text-color);
 }
@@ -724,10 +877,6 @@ main {
     color: var(--text-color); /* 标题使用主文本色 */
     font-size: 1.1em;
 }
-.tooltip-body {
-    color: var(--secondary-text);
-    font-size: 0.9em;
-}
 
 /* 移除浏览器默认的悬浮效果 */
 .software-card[title]:hover::after {
@@ -849,6 +998,23 @@ footer {
     margin-right: 0;
     margin-bottom: 30px;
     padding-right: 0; /* 移动端不需要分隔 */
+    /* 移动端不 sticky，解除高度限制 */
+    position: static; 
+    height: auto;
+    overflow-y: visible;
+  }
+  
+  /* 移动端侧边栏内容垂直布局调整 */
+  .sidebar-content-wrapper {
+      /* 移动端解除 flex-grow，让内容自然堆叠 */
+      flex-grow: 0;
+      /* 移动端不溢出，让整体页面滚动 */
+      overflow-y: visible; 
+  }
+  
+  /* 移动端 TOC 应该隐藏 */
+  .toc-fixed-wrapper {
+      display: none;
   }
   
   .software-grid {
@@ -937,16 +1103,21 @@ footer {
     padding: 0 10px; /* 内部填充 */
 }
 
+/* FIX: 首页文章列表链接样式，使其能够容纳标签 */
 .article-list-home li a {
   /* 链接占据剩余空间 */
   flex-grow: 1; 
-  display: block; /* 保持块级特性以应用 padding 和 border-bottom */
+  display: flex; /* 启用 Flexbox */
+  align-items: center;
   padding: 10px 0; /* 仅垂直填充 */
   border-bottom: 1px dashed var(--border-color);
   color: var(--text-color);
   text-decoration: none;
   transition: color 0.3s ease;
   border-radius: 0;
+  white-space: normal; /* 允许标签和标题在必要时换行或被截断 */
+  overflow: visible;
+  text-overflow: clip; 
   /* 确保链接背景透明 */
   background-color: transparent !important;
 }
@@ -1066,10 +1237,12 @@ footer {
 /* ... (保留原有样式) ... */
 
 /* 文章元数据样式 (创建日期/修改日期) */
-.article-content .article-metadata {
-    display: flex; /* 使用 Flexbox 进行布局 */
-    justify-content: flex-end; /* 右对齐 */
-    gap: 15px; /* 元素间距 */
+
+/* NEW: 文章内容页的元数据容器 (标签+日期) */
+.article-content .article-metadata-header {
+    display: flex;
+    justify-content: space-between; /* 标签左对齐，日期右对齐 */
+    align-items: center;
     font-size: 0.9em;
     color: var(--secondary-text);
     margin-top: -10px; /* 向上微调，靠近文章标题 */
@@ -1078,11 +1251,40 @@ footer {
     border-bottom: 1px solid var(--border-color); /* 添加分割线 */
 }
 
-.article-content .article-metadata span {
+/* NEW: 文章元数据中的标签容器 (左对齐) */
+.article-content .article-metadata-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px; /* 标签间的间距 */
+}
+
+/* NEW: 文章元数据中的单个标签 */
+.article-content .article-tag-detail {
+    font-size: 0.85rem;
+    color: white;
+    background-color: var(--highlight);
+    border: 1px solid var(--highlight);
+    padding: 3px 8px;
+    border-radius: 12px;
+    line-height: 1;
+    white-space: nowrap;
+    /* 增加一个细微的阴影 */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* NEW: 文章元数据中的日期容器 (右对齐) */
+.article-content .article-metadata-dates {
+    display: flex;
+    gap: 15px; /* 日期间的间距 */
+    flex-shrink: 0; /* 防止日期被压缩 */
+}
+
+
+.article-content .article-metadata-dates span {
     white-space: nowrap;
 }
 
-.article-content .article-metadata .updated-date {
+.article-content .article-metadata-dates .updated-date {
     /* 突出显示修改日期 */
     color: var(--highlight); 
     font-weight: bold;
