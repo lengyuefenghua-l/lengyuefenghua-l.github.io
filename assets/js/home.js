@@ -161,7 +161,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
         // 获取前 6 个
-        const latestSoftware = softwareList.slice(0, 6);
+        const latestSoftware = softwareList.slice(0, 3);
         latestSoftwareContainer.innerHTML = ''; // 清空加载状态
 
         if (latestSoftware.length === 0) {
