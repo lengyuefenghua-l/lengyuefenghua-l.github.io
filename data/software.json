@@ -198,5 +198,15 @@
         "website": "https://github.com/chaohershi/cclose",
         "download":"https://github.com/chaohershi/cclose/releases/download/v1.4.1.0/CClose.Setup.exe",
         "date": "2025-12-05"
+    }, 
+    {
+        "name": "QT 5.12",
+        "description": "Qt 是一个跨平台的软件开发框架。",
+        "details": "QT 5.12是最后一个提供安装包的长期支持版本",
+        "icon": "https://www.qt.io/hubfs/QtGroup_Favicon_32.ico",
+        "category": "编程开发",
+        "website": "https://download.qt.io/archive/qt",
+        "download":"https://download.qt.io/archive/qt/5.12/5.12.12/qt-opensource-windows-x86-5.12.12.exe",
+        "date": "2025-12-09"
     }
 ]
